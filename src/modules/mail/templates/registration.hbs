@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <!--<![endif]-->
+    <!--[if (gte mso 9)|(IE)]>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:AllowPNG />
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+    <![endif]-->
+    <!--[if (gte mso 9)|(IE)]>
+      <style type="text/css">
+        body {
+          width: 600px;
+          margin: 0 auto;
+        }
+        table {
+          border-collapse: collapse;
+        }
+        table,
+        td {
+          mso-table-lspace: 0pt;
+          mso-table-rspace: 0pt;
+        }
+        img {
+          -ms-interpolation-mode: bicubic;
+        }
+      </style>
+    <![endif]-->
+    <style type="text/css">
+      body, p, div {
+        font-family: inherit;
+        font-size: 14px;
+      }
+      body a {
+        color: #1188e6;
+        text-decoration: none;
+      }
+      p {
+        margin: 0;
+        padding: 0;
+      }
+      table.wrapper {
+        width: 100% !important;
+        table-layout: fixed;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+      img.max-width {
+        max-width: 100% !important;
+      }
+      .column.of-2 {
+        width: 50%;
+      }
+      .column.of-3 {
+        width: 33.333%;
+      }
+      .column.of-4 {
+        width: 25%;
+      }
+      @media screen and (max-width: 480px) {
+        .preheader .rightColumnContent,
+        .footer .rightColumnContent {
+          text-align: left !important;
+        }
+        .preheader .rightColumnContent div,
+        .preheader .rightColumnContent span,
+        .footer .rightColumnContent div,
+        .footer .rightColumnContent span {
+          text-align: left !important;
+        }
+        .preheader .rightColumnContent,
+        .preheader .leftColumnContent {
+          font-size: 80% !important;
+          padding: 5px 0;
+        }
+        table.wrapper-mobile {
+          width: 100% !important;
+          table-layout: fixed;
+        }
+        img.max-width {
+          height: auto !important;
+          max-width: 100% !important;
+        }
+        a.bulletproof-button {
+          display: block !important;
+          width: auto !important;
+          font-size: 80%;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+        .columns {
+          width: 100% !important;
+        }
+        .column {
+          display: block !important;
+          width: 100% !important;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+        }
+      }
+      table{
+        border:0;                   /* Replace border */
+        border-spacing: 0;          /* Replace cellspacing */
+        border-collapse: collapse;  /* Patch for Internet Explorer 6 and Internet Explorer 7 */
+      }
+      table td{
+        padding: 0;                 /* Replace cellpadding */
+      }
+      .w-100 {
+        width: 100%;
+      }
+      main, header, section, aside, footer {
+        margin: 0;
+        padding: 20px;
+        color: #ffffff;
+      }
+      body {
+        background: #fff;
+        margin: 0;
+        padding: 0;
+      }
+      main {
+        background-color: #e21a4e;
+        width: 80%;
+        margin: auto;
+        height: 100%;
+        padding: 15px;
+      }
+      header, footer {
+        background: #fff;
+        color: #e21a4e;
+      }
+      header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+      header {
+        text-align: center;
+      }
+      header p {
+        line-height: 1.5;
+        font-size: 32px;
+      }
+      .content {
+        background-color: #ec5c82;
+        color:#000;
+        margin: 0;
+        padding: 0;
+      }
+      footer {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+      footer .unsubscribe-section,
+      footer .unsubscribe-section .unsubscribe--sender-address,
+      footer .unsubscribe-section .unsubscribe--sender-city,
+      footer .unsubscribe-section .unsubscribe--sender-state,
+      footer .unsubscribe-section .unsubscribe--sender-postal-code,
+      footer .unsubscribe-section .unsubscribe--link,
+      footer .unsubscribe-section .unsubscribe--link-preferences {
+        color: #444444;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 16px 0 16px 0;
+        text-align: center;
+      }
+      footer .unsubscribe-section .sender-name,
+      footer .unsubscribe-section .unsubscribe--link,
+      footer .unsubscribe-section .unsubscribe--link-preferences {
+        color: #e21a4e;
+      }
+      footer .unsubscribe-section .unsubscribe--link:hover,
+      footer .unsubscribe-section .unsubscribe--link-preferences:hover {
+        color: #ec5c82;
+      }
+      .shadow {
+        text-shadow: 6px 4px 8px black;
+      }
+      .bg-white {
+        background-color: #fff;
+        color: #000;
+      }
+      .bg-black {
+        background-color: #000;
+        color: #fff;
+      }
+      .bg-pink {
+        background-color:#e21a4e;
+        color: #fff;
+      }
+      .text-white {
+        color: #ffffff;
+      }
+      .text-pink {
+        color:#e21a4e;
+      }
+      .text-size-20 {
+        font-size: 18px
+      }
+      .text-size-18 {
+        font-size: 18px
+      }
+      .text-size-16 {
+        font-size: 16px
+      }
+      .pt-10 {
+        padding-top: 10px;
+      }
+      .pb-10 {
+        padding-bottom: 10px;
+      }
+    </style>
+    <!--user entered Head Start-->
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "Muli", sans-serif;
+      }
+    </style>
+    <!--End Head user entered-->
+  </head>
+  <body>
+    <!-- Main Content -->
+    <main>
+      <div style="padding: 25px 50px;">
+        <!-- Header -->
+        <header>
+          <img src="{{ apiLogoUrl }}" alt="{{ apiTitle }}" width="100%">
+        </header>
+
+        <!-- Content -->
+        <section class="content">
+          <center class="bg-white">
+            <div class="pt=10 pb-10">
+              <div style="font-family: inherit; text-align: center">
+                <span style="font-size: 43px">Thanks for signing up, {{ recipientName }}!&nbsp;</span>
+              </div>
+              <div></div>
+            </div>
+            <div class="pt-10 pb-10">
+              <div style="font-family: inherit; text-align: center">
+                <span style="font-size: 18px">Please verify your email address to</span>
+                <span style="color: #000000; font-size: 18px; font-family: arial,helvetica,sans-serif">
+                  get access to thousands of exclusive benefits</span>
+                <span style="font-size: 18px">.</span>
+              </div>
+              <div style="font-family: inherit; text-align: center">
+                <span class="text-pink text-size-18"><strong>Thank you!&nbsp;</strong></span>
+              </div>
+              <div></div>
+            </div>
+            <div class="bg-white pt-10 pb-10">
+              <div>
+                <a
+                  href="{{ confirmUrl }}"
+                  class="bg-pink"
+                  style="
+                    border: 1px solid #e21a4e;
+                    border-color: #e21a4e;
+                    border-radius: 0;
+                    border-width: 1px;
+                    display:inline-block;
+                    font-size:14px;
+                    font-weight:normal;
+                    letter-spacing:0px;
+                    line-height:normal;
+                    padding:12px 40px 12px 40px;
+                    text-align:center;
+                    text-decoration:none; border-style:solid;
+                    font-family:inherit;
+                  "
+                  target="_blank"
+                >Verify Email Now</a>
+              </div>
+            </div>
+            <div class="bg-black">
+              <div class="pb-10 pt-10" style="font-family: inherit; text-align: center">
+                <span style="color: #ffffff; font-size: 20px"><strong>Why verify?</strong></span>
+              </div>
+              <div class="pb-10 pt-10" style="font-family: inherit; text-align: center">
+                <span class="text-white text-size-16">1. Ensures that there is a real person behind a process.</span>
+              </div>
+              <div style="font-family: inherit; text-align: center"><br></div>
+              <div style="font-family: inherit; text-align: center">
+                <span class="text-white text-size-16">2. Prevent fraud and keep you safe from potential identity theft.</span>
+              </div>
+              <div style="font-family: inherit; text-align: center"><br></div>
+              <div style="font-family: inherit; text-align: center">
+                <span class="text-white text-size-16">3. Secure, safe, and clear transactions.</span>
+              </div>
+              <div style="font-family: inherit; text-align: center"><br></div>
+              <div style="font-family: inherit; text-align: center">
+                <span class="text-white text-size-16">4. Compliance regulations stating that it is mandatory to verify customer identities and keep identity records.</span>
+              </div>
+              <div style="font-family: inherit; text-align: center">
+                <span class="text-pink text-size-16"><strong>+ much more benefits!</strong></span>
+              </div>
+              <div style="font-family: inherit; text-align: center"><br></div>
+              <div style="font-family: inherit; text-align: center">
+                <span class="text-white text-size-16">Need support? Our support team is always</span>
+              </div>
+              <div style="font-family: inherit; text-align: center">
+                <span class="text-white text-size-16">ready to help!&nbsp;</span>
+              </div>
+              <div class="pt-10 pb-10" style="font-family: inherit; text-align: center">
+                <a
+                  href="{{ contactUrl }}"
+                  class="bg-pink"
+                  style="
+                    border: 1px solid #e21a4e;
+                    border-color: #e21a4e;
+                    border-radius: 0;
+                    border-width: 1px;
+                    display:inline-block;
+                    font-size:14px;
+                    font-weight:normal;
+                    letter-spacing:0px;
+                    line-height:normal;
+                    padding:12px 40px 12px 40px;
+                    text-align:center;
+                    text-decoration:none; border-style:solid;
+                    font-family:inherit;
+                  "
+                  target="_blank"
+                >Contact Support</a>
+              </div>
+              <div style="font-family: inherit; text-align: center"><br></div>
+            </div>
+          </center>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+          <div class="unsubscribe-section">
+            <p class="sender-name"><strong>{{ senderName }}</strong></p>
+            <p>
+              <span class="unsubscribe--sender-address">{{ senderAddress }},</span>
+              <span class="unsubscribe--sender-city">{{ senderCity}},</span>
+              <span class="unsubscribe--sender-state">{{ senderState }}</span>
+              <span class="unsubscribe--sender-postal-code">{{ senderPostalCode }}</span>
+            </p>
+            <p>
+              <a href="{{ unsubscribeUrl }}" class="unsubscribe--link" target="_blank">Unsubscribe</a>
+              -
+              <a href="{{ unsubscribePreferencesUrl }}" target="_blank" class="unsubscribe--link-preferences">
+                Unsubscribe Preferences
+              </a>
+            </p>
+          </div>
+          <div class="pt-10 pb-10" style="font-family: inherit; text-align: center">
+            <a
+              href="https://ialopezg.com/"
+              style="
+                background-color: #f5f8fd;
+                border: 1px solid #f5f8fd;
+                border-color: #f5f8fd;
+                border-radius: 25px;
+                border-width: 1px;
+                color: #a8b9d5;
+                display: inline-block;
+                font-size: 10px;
+                font-weight: normal;
+                letter-spacing: 0px;
+                line-height: normal;
+                padding: 5px 18px 5px 18px;
+                text-align: center;
+                text-decoration: none;
+                border-style: solid;
+                font-family: helvetica, sans-serif;
+              "
+              target="_blank"
+            >♥ Powered by IALopezG</a>
+          </div>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>
