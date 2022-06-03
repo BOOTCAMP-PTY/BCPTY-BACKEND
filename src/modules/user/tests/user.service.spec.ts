@@ -36,21 +36,6 @@ describe('UserService', () => {
   });
 
   describe('when get an user by uuid', () => {
-    describe('and the user is matched', () => {
-      let user: UserEntity;
-
-      beforeEach(() => {
-        user = new UserEntity('John', null, 'Doe', null, '+13101234567');
-
-        getOne.mockReturnValue(Promise.resolve(user));
-      });
-
-      it('should return the user', async () => {
-        const fetchedUser = await service.getUser('12345-1234');
-
-        expect(fetchedUser).toEqual(user);
-      });
-    });
 
     describe('and the user is not matched', () => {
       beforeEach(() => {

@@ -72,7 +72,9 @@ describe('UserEntity class', () => {
       'Andrew',
       'Dawsons',
       'Smith',
+      new Date(),
       '+13101234567',
+      ''
     );
 
     expect(user).toBeTruthy();
@@ -85,64 +87,8 @@ describe('UserEntity class', () => {
     expect(user.userAuth).toBe(undefined);
   });
 
-  it('should make a user with full names, phone, and avatar only', () => {
-    const user = new UserEntity(
-      'Gailisis',
-      'Andrew',
-      'Dawsons',
-      'Smith',
-      '+13101234567',
-    );
 
-    expect(user).toBeTruthy();
-    expect(user.firstName).toBe('Gailisis');
-    expect(user.middleName).toBe('Andrew');
-    expect(user.lastName).toBe('Dawsons');
-    expect(user.motherName).toBe('Smith');
-    expect(user.phone).toBe('+13101234567');
-    expect(user.avatar).toBe('');
-    expect(user.userAuth).toBe(undefined);
-  });
 
-  it('should make a user with full names, phone, and avatar only', () => {
-    const user = new UserEntity(
-      'Gailisis',
-      'Andrew',
-      'Dawsons',
-      'Smith',
-      '+13101234567',
-      'https://image.io/test-image.jpg',
-    );
 
-    expect(user).toBeTruthy();
-    expect(user.firstName).toBe('Gailisis');
-    expect(user.middleName).toBe('Andrew');
-    expect(user.lastName).toBe('Dawsons');
-    expect(user.motherName).toBe('Smith');
-    expect(user.phone).toBe('+13101234567');
-    expect(user.avatar).toBe('https://image.io/test-image.jpg');
-    expect(user.userAuth).toBe(undefined);
-  });
 
-  it('should make a user with firstName and relation', () => {
-    const userAuth = new UserAuthEntity();
-    const user = new UserEntity(
-      'Gailisis',
-      'Andrew',
-      'Dawsons',
-      'Smith',
-      '+13101234567',
-      'https://image.io/test-image.jpg',
-      userAuth,
-    );
-
-    expect(user).toBeTruthy();
-    expect(user.firstName).toBe('Gailisis');
-    expect(user.middleName).toBe('Andrew');
-    expect(user.lastName).toBe('Dawsons');
-    expect(user.motherName).toBe('Smith');
-    expect(user.phone).toBe('+13101234567');
-    expect(user.avatar).toBe('https://image.io/test-image.jpg');
-    expect(user.userAuth).toBe(userAuth);
-  });
 });

@@ -57,13 +57,13 @@ export class UserEntity extends AbstractEntity<UserDto> {
   ) {
     super();
 
-    this.firstName = firstName || undefined;
-    this.middleName = middleName || undefined;
-    this.lastName = lastName || undefined;
-    this.motherName = motherName || undefined;
+    this.firstName = firstName || '';
+    this.middleName = middleName || '';
+    this.lastName = lastName || '';
+    this.motherName = motherName ||'';
     this.birthdate = birthdate || undefined;
-    this.phone = phone || undefined;
-    this.avatar = avatar || undefined;
+    this.phone = phone || '';
+    this.avatar = avatar || '';
     this.userAuth = userAuth || undefined;
   }
 }
