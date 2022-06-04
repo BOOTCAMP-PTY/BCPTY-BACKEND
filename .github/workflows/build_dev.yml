@@ -43,7 +43,9 @@ jobs:
         with:
           name: deploy_coverage
           path: coverage
-        
+      - name: Deploy to Heroku
+        uses: AkhileshNS/heroku-deploy@v3.12.12
+
   security:
     runs-on: ubuntu-latest
     env:
