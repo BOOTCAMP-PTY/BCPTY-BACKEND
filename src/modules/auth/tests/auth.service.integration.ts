@@ -32,7 +32,7 @@ describe('The AuthenticationService', () => {
     userAuthEntity = new UserAuthEntity(
       RoleType.USER,
       'user@email.com',
-      'strongPassword',
+      'strongPassDumy',
     );
     findAuthentication = jest.fn().mockResolvedValue(userAuthEntity);
 
@@ -77,7 +77,7 @@ describe('The AuthenticationService', () => {
 
       await authService.validateUser({
         identifier: 'user@email.com',
-        password: 'strongPassword',
+        password: 'strongPassDumy',
       });
       expect(getAuthentication).toBeCalledTimes(1);
     });
@@ -91,7 +91,7 @@ describe('The AuthenticationService', () => {
         await expect(
           authService.validateUser({
             identifier: 'user@email.com',
-            password: 'strongPassword',
+            password: 'strongPassDumy',
           }),
         ).rejects.toThrow();
       });
@@ -127,7 +127,7 @@ describe('The AuthenticationService', () => {
           await expect(
             authService.validateUser({
               identifier: 'user@email.com',
-              password: 'strongPassword',
+              password: 'strongPassDumy',
             }),
           ).rejects.toThrow();
         });
