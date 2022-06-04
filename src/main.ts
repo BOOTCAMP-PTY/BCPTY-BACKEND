@@ -12,9 +12,9 @@ import {
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
-import * as RateLimit from 'express-rate-limit';
+import RateLimit from 'express-rate-limit';
 
-import * as helmet from 'helmet';
+import  helmet from 'helmet';
 
 import * as morgan from 'morgan';
 import {
