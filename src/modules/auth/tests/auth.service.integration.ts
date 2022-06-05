@@ -14,8 +14,6 @@ import {
 import { UserAuthRepository, UserRepository } from '../../user/repositories';
 import { UserAuthService, UserService } from '../../user/services';
 import { UserAuthEntity } from '../../user/entities';
-import { MailService } from '../../mail/services';
-import { MAIL_QUEUE } from '../../mail/constants';
 import { AuthService } from '../services';
 import { RoleType } from '../../user/constants';
 
@@ -44,12 +42,11 @@ describe('The AuthenticationService', () => {
     (bcrypt.compare as jest.Mock) = bcryptCompare;
 
     module = await Test.createTestingModule({
-      imports: [BullModule.registerQueue({ name: MAIL_QUEUE })],
+      imports: [],
       providers: [
         UserService,
         UserAuthService,
         AuthService,
-        MailService,
         { provide: ConfigService, useValue: mockedConfigService },
         { provide: JwtService, useValue: mockedJwtService },
         {

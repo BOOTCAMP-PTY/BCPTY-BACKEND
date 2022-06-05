@@ -25,7 +25,6 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs-modules/mailer": "^1.6.1",
     "@nestjs/bull": "^0.5.5",
     "@nestjs/common": "^8.4.6",
     "@nestjs/config": "^2.1.0",
@@ -51,7 +50,7 @@
     "lodash": "4.17.21",
     "morgan": "1.10.0",
     "nodemailer": "^6.7.5",
-    "passport": "^0.6.0",
+    "passport": "^0.5.0",
     "passport-jwt": "4.0.0",
     "passport-local": "1.0.0",
     "pg": "^8.7.3",

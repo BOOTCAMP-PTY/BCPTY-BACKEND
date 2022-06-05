@@ -5,7 +5,7 @@ import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { PassportModule } from '@nestjs/passport';
 
 
-import { MailModule } from '../mail';
+
 import { UserModule } from '../user';
 import { AuthController } from './controllers';
 import { AuthService } from './services';
@@ -17,7 +17,6 @@ import { JwtAccessTokenStrategy, JwtConfirmTokenStrategy, JwtRefreshTokenStrateg
     UserModule,
     PassportModule,
     ConfigModule,
-    forwardRef(() => MailModule),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
