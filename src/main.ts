@@ -96,7 +96,7 @@ async function bootstrap(): Promise<void> {
   // Documentation
   setupSwagger(app);
 
-  await app.listen(configService.get('APP_PORT'));
+  await app.listen(process.env.PORT || configService.get('APP_PORT'));
   Logger.log(
     `Application is running on: ${(await app.getUrl()).removeSlashAtEnd + '/'
     }${configService.get('APP_PREFIX')}`,
