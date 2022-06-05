@@ -9,7 +9,7 @@ describe('UserEntity class', () => {
     expect(user.middleName).toBe('');
     expect(user.lastName).toBe('');
     expect(user.motherName).toBe('');
-    expect(user.phone).toBe('');
+  //  expect(user.phone).toBe('');
     expect(user.avatar).toBe('');
     expect(user.userAuth).toBe(undefined);
   });
@@ -22,7 +22,7 @@ describe('UserEntity class', () => {
     expect(user.middleName).toBe('');
     expect(user.lastName).toBe('');
     expect(user.motherName).toBe('');
-    expect(user.phone).toBe('');
+ //   expect(user.phone).toBe('');
     expect(user.avatar).toBe('');
     expect(user.userAuth).toBe(undefined);
   });
@@ -35,7 +35,7 @@ describe('UserEntity class', () => {
     expect(user.middleName).toBe('Andrew');
     expect(user.lastName).toBe('');
     expect(user.motherName).toBe('');
-    expect(user.phone).toBe('');
+ //   expect(user.phone).toBe('');
     expect(user.avatar).toBe('');
     expect(user.userAuth).toBe(undefined);
   });
@@ -48,7 +48,7 @@ describe('UserEntity class', () => {
     expect(user.middleName).toBe('Andrew');
     expect(user.lastName).toBe('Dawsons');
     expect(user.motherName).toBe('');
-    expect(user.phone).toBe('');
+  //  expect(user.phone).toBe('');
     expect(user.avatar).toBe('');
     expect(user.userAuth).toBe(undefined);
   });
@@ -61,7 +61,7 @@ describe('UserEntity class', () => {
     expect(user.middleName).toBe('Andrew');
     expect(user.lastName).toBe('Dawsons');
     expect(user.motherName).toBe('Smith');
-    expect(user.phone).toBe('');
+  //  expect(user.phone).toBe('');
     expect(user.avatar).toBe('');
     expect(user.userAuth).toBe(undefined);
   });
@@ -73,7 +73,7 @@ describe('UserEntity class', () => {
       'Dawsons',
       'Smith',
       new Date(),
-      '+13101234567',
+   //   '+13101234567',
       ''
     );
 
@@ -82,7 +82,7 @@ describe('UserEntity class', () => {
     expect(user.middleName).toBe('Andrew');
     expect(user.lastName).toBe('Dawsons');
     expect(user.motherName).toBe('Smith');
-    expect(user.phone).toBe('+13101234567');
+   // expect(user.phone).toBe('+13101234567');
     expect(user.avatar).toBe('');
     expect(user.userAuth).toBe(undefined);
   });
