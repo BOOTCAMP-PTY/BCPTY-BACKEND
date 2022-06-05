@@ -18,7 +18,6 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { MailService } from '../../../modules/mail/services';
 import { UserDto } from '../../../modules/user/dtos';
 import { UserService } from '../../../modules/user/services';
 import { UserLoginDto, UserRegistrationDto } from '../dtos';
@@ -35,8 +34,7 @@ import { AuthService } from '../services';
 export class AuthController {
   constructor(
     private readonly _authService: AuthService,
-    private readonly _userService: UserService,
-    private readonly _mailService: MailService,
+    private readonly _userService: UserService
   ) { }
 
   @Post('signup')
@@ -51,10 +49,8 @@ export class AuthController {
     @Body() userRegistrationDto: UserRegistrationDto,
   ): Promise<UserDto> {
     const user = await this._authService.register(userRegistrationDto);
-
-    await this._mailService.sendConfirmationEmail(user);
-
     return user.toDto();
+    
   }
 
 
