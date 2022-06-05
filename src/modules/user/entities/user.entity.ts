@@ -23,8 +23,6 @@ export class UserEntity extends AbstractEntity<UserDto> {
   @Column({ nullable: true })
   birthdate?: Date;
 
-  @Column({ unique: true, nullable: true })
-  phone?: string;
 
   @Column({ nullable: true })
   avatar?: string;
@@ -51,7 +49,6 @@ export class UserEntity extends AbstractEntity<UserDto> {
     lastName?: string,
     motherName?: string,
     birthdate?: Date,
-    phone?: string,
     avatar?: string,
     userAuth?: UserAuthEntity,
   ) {
@@ -62,7 +59,6 @@ export class UserEntity extends AbstractEntity<UserDto> {
     this.lastName = lastName || '';
     this.motherName = motherName ||'';
     this.birthdate = birthdate || undefined;
-    this.phone = phone || '';
     this.avatar = avatar || '';
     this.userAuth = userAuth || undefined;
   }

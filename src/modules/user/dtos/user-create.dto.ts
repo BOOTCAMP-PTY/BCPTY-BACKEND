@@ -23,8 +23,5 @@ export class UserCreateDto {
   @IsNotEmpty()
   readonly email: string;
 
-  @ApiPropertyOptional({ description: 'User phone number' })
-  @IsPhoneNumber()
-  @IsOptional()
-  readonly phone?: string;
+
 }

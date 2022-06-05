@@ -2,14 +2,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-import { AuthModule } from '../auth';
-import { DatabaseModule } from '../database';
-import { MailModule } from '../mail';
-import { UserModule } from '../user';
-import { userDeviceModule } from '../auth/user_manager/user_device';
+import { AuthModule } from '../modules/auth';
+import { DatabaseModule } from '../modules/database';
+import { UserModule } from '../modules/user';
 import { AppController } from './controllers';
 import { AppService } from './services';
-import { userArchiveModule } from '../auth/user_manager/user_archives/user_archives_module';
 
 
 
@@ -40,7 +37,6 @@ import { userArchiveModule } from '../auth/user_manager/user_archives/user_archi
     DatabaseModule,
     UserModule,
    AuthModule,
-  //  MailModule,
     
   ],
   controllers: [AppController],

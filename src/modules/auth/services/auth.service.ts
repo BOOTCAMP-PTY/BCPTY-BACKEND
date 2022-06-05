@@ -11,7 +11,7 @@ import { TokenPayloadInterface, VerificationTokenPayload } from '../interfaces';
 
 import { UserEntity } from '../../user/entities';
 import { UserAuthService, UserService } from '../../user/services';
-import { validateHash } from '../../../utils';
+import { validateHash } from '../../../common/utils';
 //import { MailService } from '../../../modules/mail/services';
 
 @Injectable()

@@ -6,7 +6,7 @@ import { Request } from 'express';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UserEntity } from '../../../modules/user/entities';
 import { UserService } from '../../../modules/user/services';
-import { encodeString } from '../../../utils';
+import { encodeString } from '../../../common/utils';
 
 import { WrongCredentialsProvidedException } from '../exceptions';
 import { TokenPayloadInterface } from '../interfaces';

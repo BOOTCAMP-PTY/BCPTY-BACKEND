@@ -4,7 +4,7 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { UpdateResult } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 
 import { RoleType } from '../constants';
 import { PostgresErrorCode } from '../../database/constraints';
@@ -13,14 +13,15 @@ import {
   PinCodeGenerationErrorException,
   UserCreationException,
 } from '../../user/exceptions';
-import { UserAuthRepository } from '../../user/repositories';
 import { UserService } from '../../user/services';
-import { generateRandomInteger } from '../../../utils';
+import { generateRandomInteger } from '../../../common/utils';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UserAuthService {
   constructor(
-     private readonly _userAuthRepository: UserAuthRepository,
+    @InjectRepository(UserAuthEntity)
+    private readonly _userAuthRepository: Repository<UserAuthEntity>,
     @Inject(forwardRef(() => UserService))
     private readonly _userService: UserService,
   ) {}

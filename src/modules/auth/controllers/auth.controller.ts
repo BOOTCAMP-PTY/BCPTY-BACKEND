@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Inject,
   Patch,
   Post,
   Req,
@@ -18,7 +19,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { MailService } from '../../../modules/mail/services';
+import { Response } from 'express';
 import { UserDto } from '../../../modules/user/dtos';
 import { UserService } from '../../../modules/user/services';
 import { UserLoginDto, UserRegistrationDto } from '../dtos';
@@ -33,11 +34,10 @@ import { AuthService } from '../services';
 @ApiTags('Auth')
 @UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
-  constructor(
-    private readonly _authService: AuthService,
-    private readonly _userService: UserService,
-    private readonly _mailService: MailService,
-  ) { }
+  @Inject(AuthService)
+  private readonly _authService: AuthService;
+  @Inject(UserService)
+  private readonly _userService: UserService;
 
   @Post('signup')
   @HttpCode(HttpStatus.OK)
@@ -48,13 +48,15 @@ export class AuthController {
   })
   @ApiOperation({ summary: 'Allows new users registration' })
   async register(
-    @Body() userRegistrationDto: UserRegistrationDto,
-  ): Promise<UserDto> {
-    const user = await this._authService.register(userRegistrationDto);
+    @Body() userRegistrationDto: UserRegistrationDto, @Res() res: Response
+  ): Promise<any> {
+    await this._authService.register(userRegistrationDto)
+    res.status(HttpStatus.OK).json([
+      { "sucess": "true" }
+    ]).send();
 
-    await this._mailService.sendConfirmationEmail(user);
 
-    return user.toDto();
+
   }
 
 

@@ -10,12 +10,10 @@ import {
   ConnectionMock,
   mockedConfigService,
   mockedJwtService,
-} from '../../../utils/mocks';
-import { UserAuthRepository, UserRepository } from '../../user/repositories';
+} from '../../../common/utils/mocks';
+
 import { UserAuthService, UserService } from '../../user/services';
 import { UserAuthEntity } from '../../user/entities';
-import { MailService } from '../../mail/services';
-import { MAIL_QUEUE } from '../../mail/constants';
 import { AuthService } from '../services';
 import { RoleType } from '../../user/constants';
 
@@ -32,7 +30,7 @@ describe('The AuthenticationService', () => {
     userAuthEntity = new UserAuthEntity(
       RoleType.USER,
       'user@email.com',
-      'strongPassword',
+      'strongPassDumy',
     );
     findAuthentication = jest.fn().mockResolvedValue(userAuthEntity);
 
@@ -44,22 +42,15 @@ describe('The AuthenticationService', () => {
     (bcrypt.compare as jest.Mock) = bcryptCompare;
 
     module = await Test.createTestingModule({
-      imports: [BullModule.registerQueue({ name: MAIL_QUEUE })],
+      imports: [],
       providers: [
         UserService,
         UserAuthService,
         AuthService,
-        MailService,
         { provide: ConfigService, useValue: mockedConfigService },
         { provide: JwtService, useValue: mockedJwtService },
-        {
-          provide: getRepositoryToken(UserAuthRepository),
-          useValue: authenticationRepository,
-        },
-        {
-          provide: getRepositoryToken(UserRepository),
-          useValue: {},
-        },
+
+    
         { provide: Connection, useClass: ConnectionMock },
       ],
     }).compile();
@@ -77,7 +68,7 @@ describe('The AuthenticationService', () => {
 
       await authService.validateUser({
         identifier: 'user@email.com',
-        password: 'strongPassword',
+        password: 'strongPassDumy',
       });
       expect(getAuthentication).toBeCalledTimes(1);
     });
@@ -91,7 +82,7 @@ describe('The AuthenticationService', () => {
         await expect(
           authService.validateUser({
             identifier: 'user@email.com',
-            password: 'strongPassword',
+            password: 'strongPassDumy',
           }),
         ).rejects.toThrow();
       });
@@ -127,7 +118,7 @@ describe('The AuthenticationService', () => {
           await expect(
             authService.validateUser({
               identifier: 'user@email.com',
-              password: 'strongPassword',
+              password: 'strongPassDumy',
             }),
           ).rejects.toThrow();
         });
