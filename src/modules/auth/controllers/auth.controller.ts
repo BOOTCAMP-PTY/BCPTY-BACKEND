@@ -20,7 +20,6 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Response } from 'express';
-import { httpSuccess } from 'src/common/enums/http-generic-response';
 import { UserDto } from '../../../modules/user/dtos';
 import { UserService } from '../../../modules/user/services';
 import { UserLoginDto, UserRegistrationDto } from '../dtos';
