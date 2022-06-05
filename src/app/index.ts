@@ -2,9 +2,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-import { AuthModule } from '../auth';
-import { DatabaseModule } from '../database';
-import { UserModule } from '../user';
+import { AuthModule } from '../modules/auth';
+import { DatabaseModule } from '../modules/database';
+import { UserModule } from '../modules/user';
 import { AppController } from './controllers';
 import { AppService } from './services';
 

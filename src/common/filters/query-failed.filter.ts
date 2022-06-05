@@ -7,7 +7,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Response } from 'express';
 import { STATUS_CODES } from 'http';
-import { PostgresErrorCode } from '../modules/database/constraints';
+import { PostgresErrorCode } from '../../modules/database/constraints';
 
 import { QueryFailedError } from 'typeorm';
 

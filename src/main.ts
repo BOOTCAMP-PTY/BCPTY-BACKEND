@@ -17,14 +17,17 @@ import RateLimit from 'express-rate-limit';
 import  helmet from 'helmet';
 
 import * as morgan from 'morgan';
+import { ConnectionOptions, createConnection } from 'typeorm';
 import {
   initializeTransactionalContext,
   patchTypeORMRepositoryWithBaseRepository,
 } from 'typeorm-transactional-cls-hooked';
-import { HttpExceptionFilter, QueryFailedFilter } from './filters';
-import { AppModule } from './modules/app';
+import { HttpExceptionFilter, QueryFailedFilter } from './common/filters';
+import { AppModule } from './app';
+import { SnakeNamingStrategy } from './modules/database/strategies';
+import { UserAuthEntity, UserEntity } from './modules/user/entities';
 
-import { setupSwagger } from './utils/swagger';
+import { setupSwagger } from './common/utils/swagger';
 
 
 async function bootstrap(): Promise<void> {
@@ -43,6 +46,24 @@ async function bootstrap(): Promise<void> {
 
   // Deployment
   app.enable('trust proxy');
+  
+  const ormdbconfig: ConnectionOptions = {
+    name: 'default',
+    type: 'postgres',
+    host: configService.get('DB_HOST'),
+    port: +configService.get<number>('DB_PORT'),
+    username: configService.get('DB_USERNAME'),
+    password: configService.get('DB_PASSWORD'),
+    database: configService.get('DB_NAME'),
+    namingStrategy: new SnakeNamingStrategy(),
+    entities: [UserEntity,UserAuthEntity],
+    migrations: [],
+    migrationsRun: true,
+    synchronize: false,
+    logging: true,
+  };
+  
+  await createConnection(ormdbconfig);
 
   // Security
   app.use(cookieParser());

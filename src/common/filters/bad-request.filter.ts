@@ -9,7 +9,7 @@ import { Reflector } from '@nestjs/core';
 import { ValidationError } from 'class-validator';
 import { Response } from 'express';
 import { STATUS_CODES } from 'http';
-import _ from 'lodash';
+import * as _ from 'lodash';
 
 @Catch(BadRequestException)
 export class HttpExceptionFilter implements ExceptionFilter {

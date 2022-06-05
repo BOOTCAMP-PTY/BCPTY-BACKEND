@@ -25,8 +25,7 @@ export class UserDto extends AbstractDto {
   @ApiPropertyOptional({ description: 'User birthdate' })
   readonly birthdate?: Date;
 
-  @ApiPropertyOptional({ description: 'User phone number' })
-  readonly phone?: string;
+
 
   @ApiPropertyOptional({ description: 'User avatar image' })
   readonly avatar?: string;
@@ -46,7 +45,6 @@ export class UserDto extends AbstractDto {
     this.lastName = user.lastName;
     this.motherName = user?.motherName;
     this.birthdate = user?.birthdate;
-    this.phone = user?.phone;
     this.userAuth = user.userAuth?.toDto();
   }
 }

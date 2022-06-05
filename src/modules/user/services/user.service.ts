@@ -3,17 +3,18 @@ import { Transactional } from 'typeorm-transactional-cls-hooked';
 
 import { UserCreateDto, UserDto } from '../dtos';
 import { UserEntity } from '../entities';
-import { UserRepository } from '../repositories';
 import { UserAuthService } from '../services';
-import { isEmail, isNumeric, isUUID } from '../../../utils';
+import { isEmail, isNumeric, isUUID } from '../../../common/utils';
 import { PageDto, PageMetaDto, PageOptionsDto } from '../../../common/dtos';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 
 @Injectable()
 export class UserService {
   constructor(
-    private  _userRepository: UserRepository,
+    @InjectRepository(UserEntity)
+    private readonly _userRepository: Repository<UserEntity>,
     private readonly _userAuthService: UserAuthService,
   ) {}
 

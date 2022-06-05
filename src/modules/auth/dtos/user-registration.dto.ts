@@ -29,8 +29,4 @@ export class UserRegistrationDto {
   @MinLength(6)
   readonly password: string;
 
-  @ApiPropertyOptional({ description: 'User phone number' })
-  @IsPhoneNumber()
-  @IsOptional()
-  readonly phone?: string;
 }

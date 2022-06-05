@@ -1,4 +1,4 @@
-import { encodeString, generateHash } from '../../../utils';
+import { encodeString, generateHash } from '../../../common/utils';
 import {
   EntitySubscriberInterface,
   EventSubscriber,
