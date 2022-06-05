@@ -10,8 +10,8 @@ import {
   ConnectionMock,
   mockedConfigService,
   mockedJwtService,
-} from '../../../utils/mocks';
-import { UserAuthRepository, UserRepository } from '../../user/repositories';
+} from '../../../common/utils/mocks';
+
 import { UserAuthService, UserService } from '../../user/services';
 import { UserAuthEntity } from '../../user/entities';
 import { AuthService } from '../services';
@@ -49,14 +49,8 @@ describe('The AuthenticationService', () => {
         AuthService,
         { provide: ConfigService, useValue: mockedConfigService },
         { provide: JwtService, useValue: mockedJwtService },
-        {
-          provide: getRepositoryToken(UserAuthRepository),
-          useValue: authenticationRepository,
-        },
-        {
-          provide: getRepositoryToken(UserRepository),
-          useValue: {},
-        },
+
+    
         { provide: Connection, useClass: ConnectionMock },
       ],
     }).compile();

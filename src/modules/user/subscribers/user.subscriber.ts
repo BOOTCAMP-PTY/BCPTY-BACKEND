@@ -6,7 +6,7 @@ import {
 } from 'typeorm';
 
 import { UserEntity } from '../../user/entities';
-import { capitalizeFirst } from '../../../utils';
+import { capitalizeFirst } from '../../../common/utils';
 
 @EventSubscriber()
 export class UserSubscriber implements EntitySubscriberInterface<UserEntity> {
