@@ -14,7 +14,7 @@ import {
   UserCreationException,
 } from '../../user/exceptions';
 import { UserService } from '../../user/services';
-import { generateRandomInteger } from '../../../common/utils';
+import { generateHash, generateRandomInteger } from '../../../common/utils';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -28,7 +28,8 @@ export class UserAuthService {
 
   public async createUserAuth(createdUser): Promise<UserAuthEntity[]> {
     const pinCode = await this._createPinCode();
-    const auth = this._userAuthRepository.create({ ...createdUser, pinCode });
+    const password = await generateHash(createdUser.password);
+    const auth = this._userAuthRepository.create({ ...createdUser, pinCode , password});
 
     try {
       return this._userAuthRepository.save(auth);

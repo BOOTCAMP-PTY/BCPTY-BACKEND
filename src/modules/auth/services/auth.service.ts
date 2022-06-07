@@ -11,7 +11,7 @@ import { TokenPayloadInterface, VerificationTokenPayload } from '../interfaces';
 
 import { UserEntity } from '../../user/entities';
 import { UserAuthService, UserService } from '../../user/services';
-import { validateHash } from '../../../common/utils';
+import { encodeString, validateHash } from '../../../common/utils';
 //import { MailService } from '../../../modules/mail/services';
 
 @Injectable()
@@ -81,7 +81,7 @@ const data= await this._userService.getUserByMail(user.identifier)
     }
 
     const isPasswordValid = await validateHash(
-      password,
+      password ,
       user.userAuth.password,
     );
 
