@@ -93,8 +93,12 @@ async function bootstrap(): Promise<void> {
     new QueryFailedFilter(reflector),
   );
 
+  
+  if (configService.get('APP_ENV') !== 'production') {
+    setupSwagger(app);
+  }
   // Documentation
-  setupSwagger(app);
+
 
   await app.listen(configService.get('APP_PORT'));
   Logger.log(

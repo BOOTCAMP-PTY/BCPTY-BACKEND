@@ -10,6 +10,6 @@ export class AppService {
   }
 
   public async welcome(): Promise<string> {
-    return 'Mon - Monsieur API - Gateway Server';
+    return 'BOOTCAMP-PTY  - Gateway Server';
   }
 }
