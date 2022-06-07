@@ -9,7 +9,7 @@ export class AppService {
     this._logger.log(`Current environment: ${process.env.NODE_ENV}`);
   }
 
-  public async welcome(): Promise<string> {
+  public  welcome(): string {
     return 'BOOTCAMP-PTY  - Gateway Server';
   }
 }

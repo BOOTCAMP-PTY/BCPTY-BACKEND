@@ -1,8 +1,6 @@
-import { BullModule } from '@nestjs/bull';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
-import { getRepositoryToken } from '@nestjs/typeorm';
 import bcrypt from 'bcrypt';
 import { Connection } from 'typeorm';
 
@@ -93,21 +91,6 @@ describe('The AuthenticationService', () => {
         bcryptCompare.mockReturnValue(true);
       });
 
-      // todo
-      // describe('and the user is found in the database', () => {
-      //   beforeEach(() => {
-      //     findAuthentication.mockResolvedValue(authentication);
-      //   });
-
-      //   it('should return the user data', async () => {
-      //     const user = await authenticationService.getAuthenticatedUser(
-      //       'user@email.com',
-      //       'strongPassword',
-      //     );
-
-      //     expect(user).toBe(authentication);
-      //   });
-      // });
 
       describe('and the user is not found in the database', () => {
         beforeEach(() => {
