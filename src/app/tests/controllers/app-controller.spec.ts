@@ -1,19 +1,22 @@
-import { Test } from "@nestjs/testing";
-import { AppModule } from "src/app";
-import { AppController } from "src/app/controllers";
+import { Test, TestingModule } from "@nestjs/testing";
+import { AppController } from "../../../app/controllers";
+import { AppService } from "../../../app/services";
 
+describe("AppController", () => {
+  let appController: AppController;
 
-describe('AppComponent', () => {
-    let myController: AppController;
-    beforeEach( async () => {
-        const module = await Test.createTestingModule({
-          imports: [AppModule],
-        }).compile();
-        myController= module.get<AppController>(AppController);
-        
-      });
+  beforeAll(async () => {
+    const app: TestingModule = await Test.createTestingModule({
+      controllers: [AppController],
+      providers: [
+        AppService,
+      ],
+    }).compile();
+    appController = app.get<AppController>(AppController);
+  });
 
-      it('should the correct value', async() => {
-        expect(await myController.welcome()).toEqual('BOOTCAMP-PTY  - Gateway Server');
-      });
+  it('should return response', async () => {
+
+    expect(await appController.welcome()).toBeDefined();
+  });
 });

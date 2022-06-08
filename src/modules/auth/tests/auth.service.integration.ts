@@ -13,7 +13,8 @@ import {
 import { UserAuthService, UserService } from '../../user/services';
 import { UserAuthEntity } from '../../user/entities';
 import { AuthService } from '../services';
-import { RoleType } from '../../user/constants';
+import { RoleType } from 'src/modules/user/constants/role-type.constant';
+
 
 jest.mock('bcrypt');
 

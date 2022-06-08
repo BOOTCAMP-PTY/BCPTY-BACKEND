@@ -116,6 +116,10 @@
     "testEnvironment": "node",
     "moduleNameMapper": {
       "^src/(.*)$": "<rootDir>/$1"
-    }
+    },
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/common/utils/mocks",
+      "<rootDir>/modules/auth/tests"
+    ]
   }
 }

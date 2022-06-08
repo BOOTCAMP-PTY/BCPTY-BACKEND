@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Repository, UpdateResult } from 'typeorm';
 
-import { RoleType } from '../constants';
+import { RoleType } from '../constants/role-type.constant';
 import { PostgresErrorCode } from '../../database/constraints';
 import { UserAuthEntity, UserEntity } from '../../user/entities';
 import {

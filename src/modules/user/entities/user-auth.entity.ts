@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 import { AbstractEntity } from '../../../common/entities';
-import { RoleType } from '../constants';
+import { RoleType } from '../constants/role-type.constant';
 import { UserAuthDto } from '../dtos';
 import { UserEntity } from './user.entity';
 
