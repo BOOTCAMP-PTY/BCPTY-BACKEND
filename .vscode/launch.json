@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Nest.js",
+        "args": ["${workspaceFolder}/src/main.ts"],
+        "runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register"],
+        "autoAttachChildProcesses": true
+      }
+    ]
+  }

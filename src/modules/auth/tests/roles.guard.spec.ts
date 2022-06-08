@@ -2,8 +2,9 @@ import { Reflector } from '@nestjs/core';
 import { createMock } from '@golevelup/nestjs-testing';
 import { ExecutionContext } from '@nestjs/common';
 
-import { RoleType } from '../../user/constants';
+
 import { RolesGuard } from '../guards';
+import { RoleType } from '../../../modules/user/constants/role-type.constant';
 
 describe('RolesGuard', () => {
   let reflector: Reflector;

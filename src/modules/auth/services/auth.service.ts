@@ -12,7 +12,7 @@ import { TokenPayloadInterface, VerificationTokenPayload } from '../interfaces';
 import { UserEntity } from '../../user/entities';
 import { UserAuthService, UserService } from '../../user/services';
 import { validateHash } from '../../../common/utils';
-//import { MailService } from '../../../modules/mail/services';
+
 
 @Injectable()
 export class AuthService {
@@ -21,7 +21,7 @@ export class AuthService {
     private readonly _userAuthService: UserAuthService,
     private readonly _jwtService: JwtService,
     private readonly _configService: ConfigService,
-    //private readonly _mailService: MailService,
+  
   ) {}
 
   public async register(
@@ -31,22 +31,7 @@ export class AuthService {
 
     return user;
   }
-/**
- * public async login(user: UserEntity): Promise<string[]> {
-    const accessTokenCookie = this._getCookieWithJwtToken(user.uuid);
-    const { cookie: refreshTokenCookie, token: refreshToken } =
-      this._getCookieWithJwtRefreshToken(user.uuid);
 
-    await this._userAuthService.updateRefreshToken(
-      user.userAuth.id,
-      refreshToken,
-    );
-
-    return [accessTokenCookie, refreshTokenCookie];
-  }
- * 
- * **/
-  
 
   public async login(user: UserLoginDto): Promise<string[]> {
 const data= await this._userService.getUserByMail(user.identifier)
@@ -81,7 +66,7 @@ const data= await this._userService.getUserByMail(user.identifier)
     }
 
     const isPasswordValid = await validateHash(
-      password,
+      password ,
       user.userAuth.password,
     );
 
@@ -136,7 +121,7 @@ const data= await this._userService.getUserByMail(user.identifier)
       throw new BadRequestException('Email already confirmed');
     }
 
-   // await this._mailService.sendConfirmationEmail(user);
+ 
   }
 
   public async confirm(user: UserEntity): Promise<void> {

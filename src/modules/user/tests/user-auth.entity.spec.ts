@@ -1,5 +1,5 @@
 
-import { RoleType } from '../constants';
+import { RoleType } from '../constants/role-type.constant';
 import { UserAuthEntity, UserEntity } from '../entities';
 
 describe('UserAuth Entity class', () => {

@@ -69,6 +69,6 @@ export class UserService {
       .take(options.take)
       .getManyAndCount();
 
-    return new PageDto(users.toDtos(), new PageMetaDto({ options, itemCount }));
+    return 
   }
 }
