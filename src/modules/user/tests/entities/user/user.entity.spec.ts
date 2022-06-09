@@ -1,4 +1,4 @@
-import { UserAuthEntity, UserEntity } from '../entities';
+import { UserEntity } from '../../../entities';
 
 describe('UserEntity class', () => {
   it('should make a user with no fields', () => {
