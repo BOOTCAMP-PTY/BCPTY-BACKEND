@@ -31,13 +31,7 @@ jobs:
         run: npm run build
       - name: Test
         run: npm run test:cov
-
-      - name: Archive code coverage result
-        if: success()
-        uses: actions/upload-artifact@v1
-        with:
-          name: deploy_coverage
-          path: coverage
+        
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
