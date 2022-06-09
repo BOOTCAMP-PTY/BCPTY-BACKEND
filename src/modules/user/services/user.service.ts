@@ -5,7 +5,7 @@ import { UserCreateDto, UserDto } from '../dtos';
 import { UserEntity } from '../entities';
 import { UserAuthService } from '../services';
 import { isEmail, isNumeric, isUUID } from '../../../common/utils';
-import { PageDto, PageMetaDto, PageOptionsDto } from '../../../common/dtos';
+import { PageDto, PageOptionsDto } from '../../../common/dtos';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 

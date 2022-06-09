@@ -21,20 +21,19 @@ export class AuthService {
     private readonly _userAuthService: UserAuthService,
     private readonly _jwtService: JwtService,
     private readonly _configService: ConfigService,
-  
-  ) {}
+
+  ) { }
 
   public async register(
     userRegistrationDto: UserRegistrationDto,
   ): Promise<UserEntity> {
-    const user = await this._userService.createUser(userRegistrationDto);
+    return this._userService.createUser(userRegistrationDto);
 
-    return user;
   }
 
 
   public async login(user: UserLoginDto): Promise<string[]> {
-const data= await this._userService.getUserByMail(user.identifier)
+    const data = await this._userService.getUserByMail(user.identifier)
     const accessTokenCookie = this._getCookieWithJwtToken(data.uuid);
     const { cookie: refreshTokenCookie, token: refreshToken } =
       this._getCookieWithJwtRefreshToken(data.uuid);
@@ -45,7 +44,7 @@ const data= await this._userService.getUserByMail(user.identifier)
     );
 
     return [accessTokenCookie, refreshTokenCookie];
-    
+
 
   }
 
@@ -66,7 +65,7 @@ const data= await this._userService.getUserByMail(user.identifier)
     }
 
     const isPasswordValid = await validateHash(
-      password ,
+      password,
       user.userAuth.password,
     );
 
@@ -106,14 +105,13 @@ const data= await this._userService.getUserByMail(user.identifier)
 
   public getJwtConfirmToken(email: string): string {
     const payload: VerificationTokenPayload = { email };
-    const token = this._jwtService.sign(payload, {
+    return this._jwtService.sign(payload, {
       secret: this._configService.get('JWT_VERIFICATION_TOKEN_SECRET_KEY'),
       expiresIn: `${this._configService.get(
         'JWT_VERIFICATION_TOKEN_EXPIRATION_TIME',
       )}s`,
     });
 
-    return token;
   }
 
   public async resendConfirmationLink(user: UserEntity): Promise<void> {
@@ -121,7 +119,7 @@ const data= await this._userService.getUserByMail(user.identifier)
       throw new BadRequestException('Email already confirmed');
     }
 
- 
+
   }
 
   public async confirm(user: UserEntity): Promise<void> {

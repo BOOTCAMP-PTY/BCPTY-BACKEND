@@ -2,7 +2,7 @@ import 'providers/polyfill.provider';
 
 
 import { ConfigService } from '@nestjs/config';
-import { ConnectionOptions } from 'typeorm';
+import { DataSourceOptions } from 'typeorm';
 import { SnakeNamingStrategy } from '../../modules/database/strategies';
 import { UserAuthSubscriber, UserSubscriber } from '../../modules/user/subscribers';
 
@@ -10,7 +10,7 @@ import { UserAuthSubscriber, UserSubscriber } from '../../modules/user/subscribe
 
 const configService = new ConfigService();
 
-const config: ConnectionOptions = {
+const config: DataSourceOptions = {
   type: 'postgres',
   host: configService.get('DB_HOST'),
   port: +configService.get<number>('DB_PORT'),

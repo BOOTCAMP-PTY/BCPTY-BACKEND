@@ -54,9 +54,6 @@ export class AuthController {
     res.status(HttpStatus.OK).json([
       { "sucess": "true" }
     ]).send();
-
-
-
   }
 
 
