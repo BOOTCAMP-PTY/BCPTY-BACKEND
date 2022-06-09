@@ -36,18 +36,13 @@ jobs:
         run: npm run build
       - name: Test
         run: npm run test:cov
-      - name: Archive build
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+      - name: Deploying image to heroku cloud
         if: success()
-        uses: actions/upload-artifact@v1
-        with:
-          name: deploy_dist
-          path: dist
-      - name: Archive code coverage result
-        if: success()
-        uses: actions/upload-artifact@v1
-        with:
-          name: deploy_coverage
-          path: coverage
       - uses: akhileshns/heroku-deploy@v3.12.12 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
