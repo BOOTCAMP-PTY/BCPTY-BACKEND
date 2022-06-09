@@ -41,8 +41,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+          
       - name: Deploying image to heroku cloud
-        if: success()
       - uses: akhileshns/heroku-deploy@v3.12.12 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
