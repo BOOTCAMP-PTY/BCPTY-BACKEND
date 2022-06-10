@@ -17,13 +17,13 @@ describe("AppService", () => {
 
   it('should return response', async () => {
 
-    expect(await appService.welcome()).toBeDefined();
+    expect(appService.welcome()).toBeDefined();
   });
 
   
   it('should return text', async () => {
 
-    expect(await appService.welcome()).toEqual('BOOTCAMP-PTY  - Gateway Server');
+    expect(appService.welcome()).toEqual('BOOTCAMP-PTY  - Gateway Server');
   });
 
   it('should compile', async () => {

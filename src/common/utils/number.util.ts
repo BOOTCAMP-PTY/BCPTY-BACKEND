@@ -3,7 +3,7 @@ export function generateRandomInteger(min: number, max: number): number {
 }
 
 export function isNumeric(value: any): boolean {
-  const pattern = /^[-+]?[0-9]+$/;
+  const pattern = /^[-+]?\d+$/;
 
   return pattern.test(value);
 }

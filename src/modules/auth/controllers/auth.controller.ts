@@ -54,9 +54,6 @@ export class AuthController {
     res.status(HttpStatus.OK).json([
       { "sucess": "true" }
     ]).send();
-
-
-
   }
 
 
@@ -69,19 +66,17 @@ export class AuthController {
     type: LoginSuccessDto,
   })
   @ApiOperation({ summary: 'Starts a new user session' })
-  async login(@Req() req: RequestWithUserInterface, @Body() userLogin: UserLoginDto, @Res() res): Promise<LoginSuccessDto> {
+  async login(@Req() req: RequestWithUserInterface, @Body() userLogin: UserLoginDto, @Res() res): Promise<void> {
     const [accessTokenCookie, refreshTokenCookie] =
       await this._authService.login(userLogin);
-
     res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
     res.send({
       success: 'true'
     })
-    return;
-    // return req.user.toDto();
+
   }
 
-  @UseGuards(JwtRefreshTokenGuard, EmailConfirmationGuard)
+  @UseGuards(JwtRefreshTokenGuard)
   @Get('profile')
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
@@ -92,9 +87,8 @@ export class AuthController {
   @ApiOperation({ summary: 'Get current user profile' })
   async userProfile(
     @Req() { user }: RequestWithUserInterface,
-  ): Promise<UserDto> {
+  ): Promise<any> {
     const userEntity = await this._userService.getUser(user.uuid);
-
     return userEntity.toDto();
   }
 

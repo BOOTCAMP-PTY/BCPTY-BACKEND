@@ -1,6 +1,6 @@
 
-import { RoleType } from '../constants/role-type.constant';
-import { UserAuthEntity, UserEntity } from '../entities';
+import { RoleType } from '../../../constants/role-type.constant';
+import { UserAuthEntity, UserEntity } from '../../../entities';
 
 describe('UserAuth Entity class', () => {
   it('should make an UserAuth with no fields', () => {
