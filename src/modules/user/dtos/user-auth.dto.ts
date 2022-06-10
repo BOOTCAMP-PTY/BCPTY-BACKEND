@@ -1,11 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { AbstractDto } from '../../../common/dtos';
+import { RoleType } from '../constants/role-type.constant';
 import { UserAuthEntity } from '../entities';
 
 export class UserAuthDto extends AbstractDto {
   @ApiProperty({ description: 'User pin code' })
   readonly pinCode: number;
+
+  @ApiProperty({ description: 'rol user´s'})
+  readonly  role: RoleType;
 
   @ApiProperty({ description: 'User email address' })
   readonly email: string;
@@ -24,6 +28,7 @@ export class UserAuthDto extends AbstractDto {
 
     this.pinCode = userAuth.pinCode;
     this.email = userAuth.email;
+    this.role = userAuth.role;
     this.lastSuccessfulLoggedDate = userAuth.lastSuccessfulLoggedDate;
     this.lastFailedLoggedDate = userAuth.lastFailedLoggedDate;
     this.lastLogoutDate = userAuth.lastLogoutDate;

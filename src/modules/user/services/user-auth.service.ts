@@ -27,11 +27,12 @@ export class UserAuthService {
   ) {}
 
   public async createUserAuth(createdUser): Promise<UserAuthEntity[]> {
-    const pinCode = await this._createPinCode();
-    const password = await generateHash(createdUser.password);
-    const auth = this._userAuthRepository.create({ ...createdUser, pinCode , password});
+
 
     try {
+      const pinCode = await this._createPinCode();
+      const password = await generateHash(createdUser.password);
+      const auth = this._userAuthRepository.create({ ...createdUser, pinCode , password});
       return await this._userAuthRepository.save(auth);
     } catch (error) {
       if (error?.code === PostgresErrorCode.UniqueViolation) {

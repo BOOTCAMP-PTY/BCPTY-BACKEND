@@ -7,7 +7,7 @@ import { QueryBuilder, Repository } from "typeorm";
 import { UserAuthEntity, UserEntity } from "../../../entities";
 import { UserAuthService, UserService } from "../../../services";
 
-describe('UserAuthServiceMock1', () => {
+describe('UserServiceMock1', () => {
     let service: UserService;
     let repositoryMock1: MockType<Repository<UserEntity>>;
     let repositoryAuthMock1: MockType<Repository<UserAuthEntity>>;
@@ -52,7 +52,7 @@ describe('UserAuthServiceMock1', () => {
     });
   });
 
-  describe('UserAuthServiceMock2', () => {
+  describe('UserServiceMock2', () => {
     let service: UserService;
     let repositoryMock: MockType<Repository<UserEntity>>;
     let repositoryAuthMock: MockType<Repository<UserAuthEntity>>;
@@ -96,7 +96,7 @@ describe('UserAuthServiceMock1', () => {
     });
   })
 
-  describe('UserAuthServiceMock3', () => {
+  describe('UserServiceMock3', () => {
     let service: UserService;
     let repositoryMock: MockType<Repository<UserEntity>>;
     let repositoryAuthMock: MockType<Repository<UserAuthEntity>>;
