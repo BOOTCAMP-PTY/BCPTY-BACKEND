@@ -89,8 +89,7 @@ export class AuthController {
     @Req() { user }: RequestWithUserInterface,
   ): Promise<any> {
     const userEntity = await this._userService.getUser(user.uuid);
-    console.log( "jeje2",userEntity.userAuth)
-    return userEntity.toDto('role');
+    return userEntity.toDto();
   }
 
   @UseGuards(JwtAccessTokenGuard)
