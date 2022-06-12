@@ -6,8 +6,8 @@ import { CourseLessonDto } from '../dto/models/course-lesson.dto';
 import { CourseMasterDto } from '../dto/models/course-master.dto';
 import { CourseCreateDto } from '../dto/models/courses-create.dto';
 import { CourseIndvRequestDto } from '../dto/request/course-ind.dto';
-import { CourseLessonGetRequestDto } from '../dto/request/course-lessons-get-dto';
-import { CourseLessonsGetRequestDto } from '../dto/request/course-lessons-get-dto copy';
+import { CourseLessonGetRequestDto } from '../dto/request/course-lesson-get-dto';
+import { CourseLessonsGetRequestDto } from '../dto/request/course-lessons-get-dto';
 import { CourseMaster } from '../entities/course-master.entity';
 import { CourseIndividual } from '../entities/course.entity';
 

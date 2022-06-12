@@ -14,7 +14,7 @@ export class CourseIndvRequestDto {
     readonly courseLessonDesc: string;
 
     @ApiPropertyOptional({ description: 'Content of the lesson part 1' })
-    readonly courseLessonContent1?: string;
+    readonly courseLessonContent1?: object[];
 
     @ApiPropertyOptional({ description:  'Content of the lesson part 2' })
     readonly courseLessonContent2?: string;

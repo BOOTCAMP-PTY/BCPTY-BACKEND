@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 
-export class CourseLessonsGetRequestDto {
+export class CourseLessonGetRequestDto {
 
     @ApiProperty({ description: 'id of the main course' })
-    readonly id_course: string;
+    readonly uuid_course: string;
 
 }

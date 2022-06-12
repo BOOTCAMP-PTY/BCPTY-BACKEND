@@ -19,8 +19,8 @@ export class CourseIndividual extends BaseEntity {
   @Column({ nullable: true })
   courseLessonDesc: string;
 
-  @Column({ nullable: true })
-  courseLessonContent1: string;
+  @Column('jsonb',{ nullable: true })
+  courseLessonContent1: object[];
 
   @Column({ nullable: true })
   courseLessonContent2: string;
