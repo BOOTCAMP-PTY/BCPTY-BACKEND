@@ -1,5 +1,4 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { UserEntity } from 'src/modules/user/entities';
 
 
 export class CourseIndvRequestDto {

@@ -2,7 +2,7 @@
 
 import { Exclude } from 'class-transformer';
 import { UserEntity } from 'src/modules/user/entities';
-import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, JoinTable, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinTable, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 
 @Entity({ name: 'courses_master' })

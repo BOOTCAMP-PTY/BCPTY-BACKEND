@@ -47,7 +47,6 @@ export class CourseService {
     public async getListLesson(courserRegistrationDto: CourseLessonGetRequestDto): Promise<any> {
         const queryBuilder = await  this._courseIndividualRepository.createQueryBuilder('courses_lessons')
             .where("uuid = :id", { id: courserRegistrationDto.uuid_course }).execute()
-            console.log(queryBuilder)
         return queryBuilder;
 
     }
@@ -55,7 +54,6 @@ export class CourseService {
     public async getListLessons(courserRegistrationDto: CourseLessonsGetRequestDto): Promise<any> {
         const queryBuilder = await  this._courseIndividualRepository.createQueryBuilder('courses_lessons')
             .where("id_course = :id", { id: courserRegistrationDto.id_course }).execute()
-            console.log(queryBuilder)
         return queryBuilder;
 
     }
