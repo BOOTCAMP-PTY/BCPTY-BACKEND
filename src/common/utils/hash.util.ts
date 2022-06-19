@@ -1,5 +1,6 @@
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
+
 export async function generateHash(password: string): Promise<string> {
   return bcrypt.hash(password, 10);
 }

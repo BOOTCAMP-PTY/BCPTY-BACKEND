@@ -12,7 +12,6 @@ import { TokenPayloadInterface, VerificationTokenPayload } from '../interfaces';
 import { UserEntity } from '../../user/entities';
 import { UserAuthService, UserService } from '../../user/services';
 import { validateHash } from '../../../common/utils';
-//import { MailService } from '../../../modules/mail/services';
 
 @Injectable()
 export class AuthService {
@@ -21,35 +20,19 @@ export class AuthService {
     private readonly _userAuthService: UserAuthService,
     private readonly _jwtService: JwtService,
     private readonly _configService: ConfigService,
-    //private readonly _mailService: MailService,
-  ) {}
+
+  ) { }
 
   public async register(
     userRegistrationDto: UserRegistrationDto,
   ): Promise<UserEntity> {
-    const user = await this._userService.createUser(userRegistrationDto);
+    return this._userService.createUser(userRegistrationDto);
 
-    return user;
   }
-/**
- * public async login(user: UserEntity): Promise<string[]> {
-    const accessTokenCookie = this._getCookieWithJwtToken(user.uuid);
-    const { cookie: refreshTokenCookie, token: refreshToken } =
-      this._getCookieWithJwtRefreshToken(user.uuid);
 
-    await this._userAuthService.updateRefreshToken(
-      user.userAuth.id,
-      refreshToken,
-    );
-
-    return [accessTokenCookie, refreshTokenCookie];
-  }
- * 
- * **/
-  
 
   public async login(user: UserLoginDto): Promise<string[]> {
-const data= await this._userService.getUserByMail(user.identifier)
+    const data = await this._userService.getUserByMail(user.identifier)
     const accessTokenCookie = this._getCookieWithJwtToken(data.uuid);
     const { cookie: refreshTokenCookie, token: refreshToken } =
       this._getCookieWithJwtRefreshToken(data.uuid);
@@ -60,7 +43,7 @@ const data= await this._userService.getUserByMail(user.identifier)
     );
 
     return [accessTokenCookie, refreshTokenCookie];
-    
+
 
   }
 
@@ -121,14 +104,13 @@ const data= await this._userService.getUserByMail(user.identifier)
 
   public getJwtConfirmToken(email: string): string {
     const payload: VerificationTokenPayload = { email };
-    const token = this._jwtService.sign(payload, {
+    return this._jwtService.sign(payload, {
       secret: this._configService.get('JWT_VERIFICATION_TOKEN_SECRET_KEY'),
       expiresIn: `${this._configService.get(
         'JWT_VERIFICATION_TOKEN_EXPIRATION_TIME',
       )}s`,
     });
 
-    return token;
   }
 
   public async resendConfirmationLink(user: UserEntity): Promise<void> {
@@ -136,7 +118,7 @@ const data= await this._userService.getUserByMail(user.identifier)
       throw new BadRequestException('Email already confirmed');
     }
 
-   // await this._mailService.sendConfirmationEmail(user);
+
   }
 
   public async confirm(user: UserEntity): Promise<void> {
