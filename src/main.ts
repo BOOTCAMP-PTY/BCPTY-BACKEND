@@ -106,7 +106,8 @@ async function bootstrap(): Promise<void> {
 
 
 
-  await app.listen(configService.get('APP_PORT'));
+
+  await app.listen(configService.get('APP_PORT') || process.env.PORT);
   Logger.log(
     `Application is running on: ${(await app.getUrl()).removeSlashAtEnd + '/'
     }${configService.get('APP_PREFIX')}`,
