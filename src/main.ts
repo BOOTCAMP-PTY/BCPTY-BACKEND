@@ -107,7 +107,7 @@ async function bootstrap(): Promise<void> {
   if (configService.get('APP_ENV') !== 'production') {
     setupSwagger(app);
   }
-
+const portApp =  process.env.PORT || configService.get('APP_PORT');
 
 
 
