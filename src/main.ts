@@ -111,10 +111,10 @@ const portApp =  process.env.PORT || configService.get('APP_PORT');
 
 
 
-  await app.listen(configService.get('APP_PORT') || process.env.PORT);
+  await app.listen(portApp);
   Logger.log(
     `Application is running on: ${(await app.getUrl()).removeSlashAtEnd + '/'}${configService.get('APP_PREFIX')}, 
-    PORT API ${configService.get('APP_PORT')} PORT 2:  ${process.env.PORT}`,
+    PORT API ${portApp} PORT 2:  ${process.env.PORT}`,
     'InstanceLoader',
   );
 }
