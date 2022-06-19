@@ -67,6 +67,10 @@ async function bootstrap(): Promise<void> {
     migrationsRun: true,
     synchronize: false,
     logging: true,
+      ssl: {      /* <----- Add SSL option */
+       
+        rejectUnauthorized: false 
+      }
   };
   
   await createConnection(ormdbconfig);

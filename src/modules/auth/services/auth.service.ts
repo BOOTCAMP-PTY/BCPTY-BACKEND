@@ -13,7 +13,6 @@ import { UserEntity } from '../../user/entities';
 import { UserAuthService, UserService } from '../../user/services';
 import { validateHash } from '../../../common/utils';
 
-
 @Injectable()
 export class AuthService {
   constructor(
