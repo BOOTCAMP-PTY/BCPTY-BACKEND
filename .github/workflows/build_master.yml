@@ -1,18 +1,15 @@
-name: build and test:master
+name: release
 
 
 on:
+
   workflow_call:
       secrets:
             SNYK_TOKEN:
                 required: true
- 
-  pull_request:
-    branches: 
-      - 'master'
   push:
     branches:
-      - 'master'
+      - 'releases/**'
 
 jobs:
   build:

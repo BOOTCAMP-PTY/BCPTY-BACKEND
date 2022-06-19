@@ -8,11 +8,11 @@ on:
                 required: true
  
   pull_request:
-    branches: 
-      - 'development'
+    branches-ignore:    
+      - 'releases/**'
   push:
-    branches:
-      - 'development'
+    branches-ignore:    
+      - 'releases/**'
 
 jobs:
   build:
