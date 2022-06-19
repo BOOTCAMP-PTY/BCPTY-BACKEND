@@ -1,7 +1,8 @@
 
 
 import { Exclude } from 'class-transformer';
-import { Column, CreateDateColumn, Entity, OneToOne, UpdateDateColumn } from 'typeorm';
+import { CourseMaster } from 'src/modules/courses/entities/course-master.entity';
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, UpdateDateColumn } from 'typeorm';
 import { AbstractEntity } from '../../../common/entities';
 import { UserDto } from '../dtos';
 import { UserAuthEntity } from '../entities';
@@ -23,7 +24,6 @@ export class UserEntity extends AbstractEntity<UserDto> {
   @Column({ nullable: true })
   birthdate?: Date;
 
-
   @Column({ nullable: true })
   avatar?: string;
 
@@ -35,10 +35,17 @@ export class UserEntity extends AbstractEntity<UserDto> {
   @Exclude()
   updatedAt: Date;
 
+
+  @OneToOne(() => CourseMaster)
+  @JoinColumn()
+  courseListAuthor: CourseMaster;
+
   @OneToOne(() => UserAuthEntity, (userAuth: UserAuthEntity) => userAuth.user, {
     eager: true,
     onDelete: 'CASCADE',
   })
+
+  
   public userAuth: UserAuthEntity;
 
   dtoClass = UserDto;
@@ -51,6 +58,7 @@ export class UserEntity extends AbstractEntity<UserDto> {
     birthdate?: Date,
     avatar?: string,
     userAuth?: UserAuthEntity,
+    courseListAuthor?: CourseMaster,
   ) {
     super();
 
@@ -61,5 +69,6 @@ export class UserEntity extends AbstractEntity<UserDto> {
     this.birthdate = birthdate || undefined;
     this.avatar = avatar || '';
     this.userAuth = userAuth || undefined;
+    this.courseListAuthor = courseListAuthor || undefined;
   }
 }

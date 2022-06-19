@@ -28,6 +28,8 @@ import { SnakeNamingStrategy } from './modules/database/strategies';
 import { UserAuthEntity, UserEntity } from './modules/user/entities';
 
 import { setupSwagger } from './common/utils/swagger';
+import { CourseMaster } from './modules/courses/entities/course-master.entity';
+import { CourseIndividual } from './modules/courses/entities/course.entity';
 
 
 async function bootstrap(): Promise<void> {
@@ -56,7 +58,11 @@ async function bootstrap(): Promise<void> {
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_NAME'),
     namingStrategy: new SnakeNamingStrategy(),
-    entities: [UserEntity,UserAuthEntity],
+    entities: [
+      UserEntity,
+      UserAuthEntity,
+      CourseMaster,
+      CourseIndividual],
     migrations: [],
     migrationsRun: true,
     synchronize: false,
