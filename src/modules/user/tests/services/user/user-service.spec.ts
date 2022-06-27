@@ -14,18 +14,18 @@ describe('UserServiceMock1', () => {
 
     const user : Partial<any> = { uuid:'a', email: 'agmi@gmail.com'};
     const repositoryMockFactoryLocalUser1: () => MockType<Repository<any>> = jest.fn(() => ({
-        create: jest.fn(),
-        save: jest.fn(),
-        update: jest.fn().mockReturnThis(),
-        findOne: jest.fn().mockReturnThis(),
-        getOne:  jest.fn().mockReturnThis(),
-        createQueryBuilder: jest.fn(() => ({
-            where: jest.fn().mockReturnThis(),
-            setParameter: jest.fn().mockReturnThis(),
-            leftJoinAndSelect: jest.fn().mockReturnThis(),
-            getOne:  jest.fn(() => Promise.resolve(user)),
-            orWhere: jest.fn().mockReturnThis(),
-        }))
+      create: jest.fn(),
+      save: jest.fn(),
+      update: jest.fn().mockReturnThis(),
+      findOne: jest.fn().mockReturnThis(),
+      getOne:  jest.fn().mockReturnThis(),
+      createQueryBuilder: jest.fn(() => ({
+          where: jest.fn().mockReturnThis(),
+          setParameter: jest.fn().mockReturnThis(),
+          leftJoinAndSelect: jest.fn().mockReturnThis(),
+          getOne:  jest.fn(() => Promise.resolve(user)),
+          orWhere: jest.fn().mockReturnThis(),
+      }))
     }));
 
     beforeEach(async () => {

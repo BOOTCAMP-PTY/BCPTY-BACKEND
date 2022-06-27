@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { CoursesModule } from 'src/modules/courses';
+import { DataSource } from 'typeorm';
 import { AuthModule } from '../modules/auth';
 import { DatabaseModule } from '../modules/database';
 import { UserModule } from '../modules/user';
@@ -44,4 +45,8 @@ import { AppService } from './services';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private dataSource: DataSource) {
+
+  }
+ }

@@ -2,13 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { Transactional } from 'typeorm-transactional-cls-hooked';
 
 import { UserCreateDto, UserDto } from '../dtos';
-import { UserEntity } from '../entities';
+import { UserAuthEntity, UserEntity } from '../entities';
 import { UserAuthService } from '../services';
-import { isEmail, isNumeric, isUUID } from '../../../common/utils';
+import {
+  generateHash,
+  generateRandomInteger,
+  isEmail,
+  isNumeric,
+  isUUID,
+} from '../../../common/utils';
 import { PageDto, PageOptionsDto } from '../../../common/dtos';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-
+import { DataSource, Repository } from 'typeorm';
+import { PinCodeGenerationErrorException } from '../exceptions';
+import { RoleType } from '../constants/role-type.constant';
 
 @Injectable()
 export class UserService {
@@ -16,20 +23,49 @@ export class UserService {
     @InjectRepository(UserEntity)
     private readonly _userRepository: Repository<UserEntity>,
     private readonly _userAuthService: UserAuthService,
+    private DataSourceService: DataSource,
   ) {}
 
-  @Transactional()
-  public async createUser(userCreateDto: UserCreateDto): Promise<UserEntity> {
-    const user = this._userRepository.create(userCreateDto);
-    await this._userRepository.save(user);
+  public async createUser(userCreateDto: any): Promise<any> {
+    await this.DataSourceService.manager.transaction(
+      async (transactionalEntityManager) => {
+        const user = await transactionalEntityManager.save(
+          UserEntity,
+          userCreateDto,
+        );
+        const pinCode = await this._createPinCode();
+        const password = await generateHash(user.password);
+        const createdUser = { ...userCreateDto, user, pinCode, password };
+        await transactionalEntityManager.save(UserAuthEntity, createdUser);
 
-    const createdUser = { ...userCreateDto, user };
+        return this.findUser({ uuid: user.uuid });
+      },
+    );
 
-    await Promise.all([this._userAuthService.createUserAuth(createdUser)]);
+    //await this._userRepository.save(user);
 
-    return this.findUser({ uuid: user.uuid });
+    // const createdUser = { ...userCreateDto, user };
+
+    //  await Promise.all([this._userAuthService.createUserAuth(createdUser)]);
   }
+  private async _createPinCode(): Promise<number> {
+    const pinCode = this._generatePinCode();
+    const user = await this.findUserAuth({ pinCode });
 
+    try {
+      return user ? await this._createPinCode() : pinCode;
+    } catch (error) {
+      throw new PinCodeGenerationErrorException(error);
+    }
+  }
+  private _generatePinCode(): number {
+    return generateRandomInteger(1, 10e5 - 1);
+  }
+  public async findUserAuth(
+    options: Partial<{ pinCode: number; role: RoleType }>,
+  ): Promise<UserEntity | undefined> {
+    return this.findUser(options);
+  }
   public async findUser(
     options: Partial<{ uuid: string; email: string; pinCode: number }>,
   ): Promise<UserEntity | undefined> {
@@ -57,8 +93,8 @@ export class UserService {
   public async getUser(uuid: string): Promise<UserEntity | undefined> {
     return this.findUser({ uuid });
   }
-  public async getUserByMail(email: string): Promise< any | undefined> {
-    return this.findUser({ email});
+  public async getUserByMail(email: string): Promise<any | undefined> {
+    return this.findUser({ email });
   }
   public async getUsers(options: PageOptionsDto): Promise<PageDto<UserDto>> {
     const queryBuilder = this._userRepository.createQueryBuilder('user');
@@ -69,6 +105,6 @@ export class UserService {
       .take(options.take)
       .getManyAndCount();
 
-    return 
+    return;
   }
 }

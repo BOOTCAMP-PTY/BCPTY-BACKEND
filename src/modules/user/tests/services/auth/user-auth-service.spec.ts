@@ -1,7 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
 import { MockType } from "src/common/utils/mocks";
-import { authServiceMock, userServiceMock } from "src/common/utils/mocks/auth-service.mock";
+import { userServiceMock } from "src/common/utils/mocks/auth-service.mock";
 import { repositoryMockFactory } from "src/common/utils/mocks/repository-factory.mock";
 import { UserCreationException } from "src/modules/user/exceptions";
 import { Repository } from "typeorm";

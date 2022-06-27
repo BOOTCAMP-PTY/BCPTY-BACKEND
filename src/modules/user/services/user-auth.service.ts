@@ -4,7 +4,7 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { Repository, UpdateResult } from 'typeorm';
+import { DataSource, Repository, UpdateResult } from 'typeorm';
 
 import { RoleType } from '../constants/role-type.constant';
 import { PostgresErrorCode } from '../../database/constraints';
@@ -24,6 +24,7 @@ export class UserAuthService {
     private readonly _userAuthRepository: Repository<UserAuthEntity>,
     @Inject(forwardRef(() => UserService))
     private readonly _userService: UserService,
+    private DataSourceService: DataSource,
   ) {}
 
   public async createUserAuth(createdUser): Promise<UserAuthEntity[]> {
@@ -32,7 +33,9 @@ export class UserAuthService {
     try {
       const pinCode = await this._createPinCode();
       const password = await generateHash(createdUser.password);
+    //  this._userAuthRepository.
       const auth = this._userAuthRepository.create({ ...createdUser, pinCode , password});
+      
       return await this._userAuthRepository.save(auth);
     } catch (error) {
       if (error?.code === PostgresErrorCode.UniqueViolation) {
@@ -65,7 +68,7 @@ export class UserAuthService {
     });
   }
 
-  private async _createPinCode(): Promise<number> {
+  public async _createPinCode(): Promise<number> {
     const pinCode = this._generatePinCode();
     const user = await this.findUserAuth({ pinCode });
 
