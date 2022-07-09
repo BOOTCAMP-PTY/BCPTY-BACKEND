@@ -17,7 +17,7 @@ import RateLimit from 'express-rate-limit';
 import  helmet from 'helmet';
 
 import * as morgan from 'morgan';
-import { ConnectionOptions, createConnection } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 import {
   initializeTransactionalContext,
   patchTypeORMRepositoryWithBaseRepository,
@@ -49,7 +49,7 @@ async function bootstrap(): Promise<void> {
   // Deployment
   app.enable('trust proxy');
   
-  const ormdbconfig: ConnectionOptions = {
+  const ormdbconfig: DataSourceOptions = {
     name: 'default',
     type: 'postgres',
     host: configService.get('DB_HOST'),
@@ -63,17 +63,21 @@ async function bootstrap(): Promise<void> {
       UserAuthEntity,
       CourseMaster,
       CourseIndividual],
-    migrations: [],
+    migrations: ["dist/migration/**/*.js"],
     migrationsRun: true,
     synchronize: false,
     logging: true,
-      ssl: {      /* <----- Add SSL option */
-       
-        rejectUnauthorized: false 
-      }
+
   };
-  
-  await createConnection(ormdbconfig);
+  const AppDataSource = new DataSource(ormdbconfig)
+  AppDataSource.initialize()
+  .then(() => {
+      console.log("Data Source has been initialized!")
+  })
+  .catch((err) => {
+      console.error("Error during Data Source initialization", err)
+  })
+
 
   // Security
   app.use(cookieParser());

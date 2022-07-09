@@ -20,15 +20,21 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Response } from 'express';
+import {
+  ResponseCode,
+  ResponseName,
+} from 'src/common/constants/response.constant';
 import { UserDto } from '../../../modules/user/dtos';
 import { UserService } from '../../../modules/user/services';
 import { UserLoginDto, UserRegistrationDto } from '../dtos';
 import { LoginSuccessDto } from '../dtos/login-sucess.dto';
-import { LocalAuthenticationGuard, JwtRefreshTokenGuard, EmailConfirmationGuard, JwtAccessTokenGuard, JwtConfirmTokenGuard } from '../guards';
+import {
+  LocalAuthenticationGuard,
+  JwtRefreshTokenGuard,
+  JwtAccessTokenGuard,
+} from '../guards';
 import { RequestWithUserInterface } from '../interfaces';
 import { AuthService } from '../services';
-
-
 
 @Controller({ path: 'Auth', version: '1' })
 @ApiTags('Auth')
@@ -48,14 +54,15 @@ export class AuthController {
   })
   @ApiOperation({ summary: 'Allows new users registration' })
   async register(
-    @Body() userRegistrationDto: UserRegistrationDto, @Res() res: Response
+    @Body() userRegistrationDto: UserRegistrationDto,
+    @Res() res: Response,
   ): Promise<any> {
-    await this._authService.register(userRegistrationDto)
-    res.status(HttpStatus.OK).json([
-      { "sucess": "true" }
-    ]).send();
+    await this._authService.register(userRegistrationDto);
+    res
+      .status(HttpStatus.OK)
+      .json(`${ResponseName.SUCCESS}:${ResponseCode.SUCCESS_CODE}`)
+      .send();
   }
-
 
   @UseGuards(LocalAuthenticationGuard)
   @Post('signin')
@@ -66,14 +73,17 @@ export class AuthController {
     type: LoginSuccessDto,
   })
   @ApiOperation({ summary: 'Starts a new user session' })
-  async login(@Req() req: RequestWithUserInterface, @Body() userLogin: UserLoginDto, @Res() res): Promise<void> {
+  async login(
+    @Req() req: RequestWithUserInterface,
+    @Body() userLogin: UserLoginDto,
+    @Res() res,
+  ): Promise<void> {
     const [accessTokenCookie, refreshTokenCookie] =
       await this._authService.login(userLogin);
-    res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
-    res.send({
-      success: 'true'
-    })
-
+    res
+      .setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie])
+      .json(`${ResponseName.SUCCESS}:${ResponseCode.SUCCESS_CODE}`)
+      .send();
   }
 
   @UseGuards(JwtRefreshTokenGuard)
@@ -85,9 +95,7 @@ export class AuthController {
     type: UserDto,
   })
   @ApiOperation({ summary: 'Get current user profile' })
-  async userProfile(
-    @Req() { user }: RequestWithUserInterface,
-  ): Promise<any> {
+  async userProfile(@Req() { user }: RequestWithUserInterface): Promise<any> {
     const userEntity = await this._userService.getUser(user.uuid);
     return userEntity.toDto();
   }
@@ -103,43 +111,5 @@ export class AuthController {
       'Set-Cookie',
       this._authService.getCookiesForLogout(),
     );
-  }
-
-  @UseGuards(JwtRefreshTokenGuard)
-  @Get('refresh')
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'User information with a new access token',
-    type: UserDto,
-  })
-  @ApiOperation({ summary: 'Refresh current user access token' })
-  async refresh(@Req() request: RequestWithUserInterface): Promise<void> {
-    const accessTokenCookie = this._authService.refreshToken(request.user);
-
-    request.res.setHeader('Set-Cookie', accessTokenCookie);
-  }
-
-  @UseGuards(JwtConfirmTokenGuard)
-  @Patch('confirm')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiOperation({
-    summary: 'Finish the confirmation email process for current user',
-  })
-  async confirm(@Req() { user }: RequestWithUserInterface): Promise<void> {
-    console.log(this.userProfile);
-
-    return this._authService.confirm(user);
-  }
-
-  @UseGuards(JwtAccessTokenGuard)
-  @Post('confirm/resend')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiOperation({
-    summary: 'Resend the confirmation link for current user',
-  })
-  async resendConfirmationLink(
-    @Req() { user }: RequestWithUserInterface,
-  ): Promise<void> {
-    await this._authService.resendConfirmationLink(user);
   }
 }
