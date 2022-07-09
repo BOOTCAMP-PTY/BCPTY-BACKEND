@@ -1,11 +1,11 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
 import { MockType } from "src/common/utils/mocks";
-import { authServiceMock } from "src/common/utils/mocks/auth-service.mock";
 import { repositoryMockFactory } from "src/common/utils/mocks/repository-factory.mock";
-import { QueryBuilder, Repository } from "typeorm";
+import { UserCreationException } from "src/modules/user/exceptions";
+import { DataSource, Repository } from "typeorm";
 import { UserAuthEntity, UserEntity } from "../../../entities";
-import { UserAuthService, UserService } from "../../../services";
+import { UserService } from "../../../services";
 
 describe('UserServiceMock1', () => {
     let service: UserService;
@@ -32,7 +32,7 @@ describe('UserServiceMock1', () => {
       const module: TestingModule = await Test.createTestingModule({
         providers: [
           UserService,
-          { provide: UserAuthService, useFactory: authServiceMock },
+          { provide: DataSource, useFactory: repositoryMockFactory },
           // Provide your mock instead of the actual repository
           { provide: getRepositoryToken(UserEntity), useFactory: repositoryMockFactoryLocalUser1 },
           { provide: getRepositoryToken(UserAuthEntity), useFactory: repositoryMockFactory },
@@ -77,7 +77,7 @@ describe('UserServiceMock1', () => {
       const module: TestingModule = await Test.createTestingModule({
         providers: [
           UserService,
-          { provide: UserAuthService, useFactory: authServiceMock },
+          { provide: DataSource, useFactory: repositoryMockFactory },
           // Provide your mock instead of the actual repository
           { provide: getRepositoryToken(UserEntity), useFactory: repositoryMockFactoryLocalUser },
           { provide: getRepositoryToken(UserAuthEntity), useFactory: repositoryMockFactory },
@@ -121,7 +121,7 @@ describe('UserServiceMock1', () => {
       const module: TestingModule = await Test.createTestingModule({
         providers: [
           UserService,
-          { provide: UserAuthService, useFactory: authServiceMock },
+          { provide: DataSource, useFactory: repositoryMockFactory },
           // Provide your mock instead of the actual repository
           { provide: getRepositoryToken(UserEntity), useFactory: repositoryMockFactoryLocalUser },
           { provide: getRepositoryToken(UserAuthEntity), useFactory: repositoryMockFactory },
@@ -138,4 +138,17 @@ describe('UserServiceMock1', () => {
       expect(userResult).toBeDefined();
       expect(userResult).toEqual(user);
     });
+
+    it('should throw UserCreationException when user doesn´t exist', async () => {
+
+      try {
+        const user : Partial<any> = { uuid:'a', email: 'agmi@gmail.com'};
+         await service.createUser(user)
+      } catch (error) {
+        expect(error).toBeInstanceOf(UserCreationException)
+
+      }
+
+
+  });
   })

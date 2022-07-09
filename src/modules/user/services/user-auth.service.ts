@@ -1,20 +1,17 @@
 import {
-  BadRequestException,
   forwardRef,
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { DataSource, Repository, UpdateResult } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 
 import { RoleType } from '../constants/role-type.constant';
-import { PostgresErrorCode } from '../../database/constraints';
 import { UserAuthEntity, UserEntity } from '../../user/entities';
 import {
   PinCodeGenerationErrorException,
-  UserCreationException,
 } from '../../user/exceptions';
 import { UserService } from '../../user/services';
-import { generateHash, generateRandomInteger } from '../../../common/utils';
+import { generateRandomInteger } from '../../../common/utils';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -23,28 +20,9 @@ export class UserAuthService {
     @InjectRepository(UserAuthEntity)
     private readonly _userAuthRepository: Repository<UserAuthEntity>,
     @Inject(forwardRef(() => UserService))
-    private readonly _userService: UserService,
-    private DataSourceService: DataSource,
+    private readonly _userService: UserService
   ) {}
 
-  public async createUserAuth(createdUser): Promise<UserAuthEntity[]> {
-
-
-    try {
-      const pinCode = await this._createPinCode();
-      const password = await generateHash(createdUser.password);
-    //  this._userAuthRepository.
-      const auth = this._userAuthRepository.create({ ...createdUser, pinCode , password});
-      
-      return await this._userAuthRepository.save(auth);
-    } catch (error) {
-      if (error?.code === PostgresErrorCode.UniqueViolation) {
-        throw new BadRequestException('User with that email already exists');
-      }
-
-      throw new UserCreationException(error);
-    }
-  }
 
   public async findUserAuth(
     options: Partial<{ pinCode: number; role: RoleType }>,
