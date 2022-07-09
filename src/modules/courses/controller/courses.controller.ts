@@ -58,7 +58,7 @@ export class CoursesController {
   })
 
   @ApiOperation({ summary: 'Registers a new lesson into a course' })
-  //  @UseGuards(JwtAccessTokenGuard)
+  @UseGuards(JwtAccessTokenGuard)
   async addCourse(
     @Body() courserRegistrationDto: CourseIndvRequestDto, @Res() res: Response
   ): Promise<any> {
@@ -77,7 +77,7 @@ export class CoursesController {
   })
 
   @ApiOperation({ summary: 'retrieves a complete list about all the courses' })
-  //  @UseGuards(JwtAccessTokenGuard)
+  @UseGuards(JwtAccessTokenGuard)
   async getListLesson(
     @Body() courserRegistrationDto: CourseLessonGetRequestDto, @Res() res: Response
   ): Promise<any> {
@@ -97,7 +97,7 @@ export class CoursesController {
   })
 
   @ApiOperation({ summary: 'retrieves a complete list about all the courses' })
-  //  @UseGuards(JwtAccessTokenGuard)
+   @UseGuards(JwtAccessTokenGuard)
   async getListLessons(
     @Body() courserRegistrationDto: CourseLessonsGetRequestDto, @Res() res: Response
   ): Promise<any> {

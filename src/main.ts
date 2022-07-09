@@ -17,7 +17,7 @@ import RateLimit from 'express-rate-limit';
 import  helmet from 'helmet';
 
 import * as morgan from 'morgan';
-import { ConnectionOptions, createConnection, DataSource, DataSourceOptions } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 import {
   initializeTransactionalContext,
   patchTypeORMRepositoryWithBaseRepository,
