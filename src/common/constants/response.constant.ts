@@ -1,6 +1,12 @@
 export enum ResponseCode {
-    SUCCESS= '200',
-    FAIL = '500',
-    CATASTROFIC = '404',
+    SUCCESS_CODE= '200',
+    FAIL_CODE = '500',
+    CATASTROFIC_CODE = '404',
+  }
+
+  export enum ResponseName {
+    SUCCESS= 'SUCCESS',
+    FAIL = 'FAILED',
+    CATASTROFIC = 'DAMN',
   }
   
