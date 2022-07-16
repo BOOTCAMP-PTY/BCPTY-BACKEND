@@ -1,5 +1,6 @@
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
+import * as argon2 from 'argon2';
 
 export async function generateHash(password: string): Promise<string> {
   return bcrypt.hash(password, 10);
@@ -12,8 +13,8 @@ export async function validateHash(
   if (!password || !hash) {
     return Promise.resolve(false);
   }
+  return bcrypt.compare(password, hash || '').then();
 
-  return bcrypt.compare(password, hash || '');
 }
 
 export function encodeString(text: string): string {

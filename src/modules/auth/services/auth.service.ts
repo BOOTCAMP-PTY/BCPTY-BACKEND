@@ -20,20 +20,17 @@ export class AuthService {
     private readonly _userAuthService: UserAuthService,
     private readonly _jwtService: JwtService,
     private readonly _configService: ConfigService,
-
-  ) { }
+  ) {}
 
   public async register(
     userRegistrationDto: UserRegistrationDto,
   ): Promise<UserEntity> {
     return this._userService.createUser(userRegistrationDto);
-
   }
 
-
   public async login(user: UserLoginDto): Promise<string[]> {
-    const data = await this._userService.getUserByMail(user.identifier)
-    const accessTokenCookie = this._getCookieWithJwtToken(data.uuid);
+    const data = await this._userService.getUserByMail(user.identifier);
+    const accessTokenCookie = await this._getCookieWithJwtToken(data.uuid);
     const { cookie: refreshTokenCookie, token: refreshToken } =
       this._getCookieWithJwtRefreshToken(data.uuid);
 
@@ -43,8 +40,6 @@ export class AuthService {
     );
 
     return [accessTokenCookie, refreshTokenCookie];
-
-
   }
 
   public async logout(user: UserEntity): Promise<void> {
@@ -62,7 +57,6 @@ export class AuthService {
     if (!user) {
       throw new WrongCredentialsProvidedException();
     }
-
     const isPasswordValid = await validateHash(
       password,
       user.userAuth.password,
@@ -110,15 +104,12 @@ export class AuthService {
         'JWT_VERIFICATION_TOKEN_EXPIRATION_TIME',
       )}s`,
     });
-
   }
 
   public async resendConfirmationLink(user: UserEntity): Promise<void> {
     if (user.userAuth.isEmailConfirmed) {
       throw new BadRequestException('Email already confirmed');
     }
-
-
   }
 
   public async confirm(user: UserEntity): Promise<void> {

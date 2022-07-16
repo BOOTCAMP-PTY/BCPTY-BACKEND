@@ -3,7 +3,6 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserDto } from '../dtos';
 import { UserAuthEntity, UserEntity } from '../entities';
 import {
-  generateHash,
   generateRandomInteger,
   isEmail,
   isNumeric,
@@ -18,6 +17,7 @@ import {
 } from '../exceptions';
 import { RoleType } from '../constants/role-type.constant';
 import { PostgresErrorCode } from 'src/modules/database/constraints';
+import { UserRegistrationDto } from 'src/modules/auth/dtos';
 
 @Injectable()
 export class UserService {
@@ -27,7 +27,7 @@ export class UserService {
     private DataSourceService: DataSource,
   ) {}
 
-  public async createUser(userCreateDto: any): Promise<any> {
+  public async createUser(userCreateDto: UserRegistrationDto): Promise<any> {
     try {
       await this.DataSourceService.manager.transaction(
         async (transactionalEntityManager) => {
@@ -36,8 +36,8 @@ export class UserService {
             userCreateDto,
           );
           const pinCode = await this._createPinCode();
-          const password = await generateHash(user.password);
-          const createdUser = { ...userCreateDto, user, pinCode, password };
+          const password = user.password;
+          const createdUser = { ...userCreateDto, password ,user, pinCode };
           await transactionalEntityManager.save(UserAuthEntity, createdUser);
 
           return this.findUser({ uuid: user.uuid });
@@ -71,7 +71,7 @@ export class UserService {
   }
   public async findUser(
     options: Partial<{ uuid: string; email: string; pinCode: number }>,
-  ): Promise<UserEntity | undefined> {
+  ): Promise<UserEntity > {
     const queryBuilder = this._userRepository.createQueryBuilder('user');
 
     queryBuilder.leftJoinAndSelect('user.userAuth', 'userAuth');
@@ -87,17 +87,19 @@ export class UserService {
     }
 
     if (options.email && isEmail(options.email)) {
+     
       queryBuilder.orWhere('userAuth.email = :email', { email: options.email });
     }
-
-    return queryBuilder.getOne();
+    const resultQuery = await queryBuilder.getOne();
+    return resultQuery;
   }
 
   public async getUser(uuid: string): Promise<UserEntity | undefined> {
     return this.findUser({ uuid });
   }
-  public async getUserByMail(email: string): Promise<any | undefined> {
-    return this.findUser({ email });
+  public async getUserByMail(email: string): Promise<any> {
+    const userData = await this.findUser({ email });
+    return userData;
   }
   public async getUsers(options: PageOptionsDto): Promise<PageDto<UserDto>> {
     const queryBuilder = this._userRepository.createQueryBuilder('user');

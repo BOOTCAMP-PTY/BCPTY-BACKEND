@@ -19,15 +19,15 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { Response } from 'express';
 import {
   ResponseCode,
+  responseKey,
   ResponseName,
 } from 'src/common/constants/response.constant';
+import { successResponse } from 'src/common/dtos/http-response.dto';
 import { UserDto } from '../../../modules/user/dtos';
 import { UserService } from '../../../modules/user/services';
 import { UserLoginDto, UserRegistrationDto } from '../dtos';
-import { LoginSuccessDto } from '../dtos/login-sucess.dto';
 import {
   LocalAuthenticationGuard,
   JwtRefreshTokenGuard,
@@ -50,17 +50,20 @@ export class AuthController {
   @ApiOkResponse({
     description: 'Successfully Registered',
     status: HttpStatus.OK,
-    type: UserDto,
+    type: successResponse,
   })
   @ApiOperation({ summary: 'Allows new users registration' })
   async register(
     @Body() userRegistrationDto: UserRegistrationDto,
-    @Res() res: Response,
+    @Res() res,
   ): Promise<any> {
     await this._authService.register(userRegistrationDto);
     res
       .status(HttpStatus.OK)
-      .json(`${ResponseName.SUCCESS}:${ResponseCode.SUCCESS_CODE}`)
+      .json({
+        [responseKey.STATUS]: ResponseCode.SUCCESS_CODE,
+        [responseKey.MESSAGE]: ResponseName.SUCCESS,
+      })
       .send();
   }
 
@@ -70,7 +73,7 @@ export class AuthController {
   @ApiOkResponse({
     description: 'An user logged in and a session cookie',
     status: HttpStatus.OK,
-    type: LoginSuccessDto,
+    type: successResponse,
   })
   @ApiOperation({ summary: 'Starts a new user session' })
   async login(
@@ -82,7 +85,10 @@ export class AuthController {
       await this._authService.login(userLogin);
     res
       .setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie])
-      .json(`${ResponseName.SUCCESS}:${ResponseCode.SUCCESS_CODE}`)
+      .json({
+        [responseKey.STATUS]: ResponseCode.SUCCESS_CODE,
+        [responseKey.MESSAGE]: ResponseName.SUCCESS,
+      })
       .send();
   }
 
