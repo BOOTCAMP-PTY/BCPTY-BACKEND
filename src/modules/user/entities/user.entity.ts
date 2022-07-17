@@ -2,7 +2,7 @@
 
 import { Exclude } from 'class-transformer';
 import { CourseMaster } from 'src/modules/courses/entities/course-master.entity';
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, UpdateDateColumn } from 'typeorm';
 import { AbstractEntity } from '../../../common/entities';
 import { UserDto } from '../dtos';
 import { UserAuthEntity } from '../entities';

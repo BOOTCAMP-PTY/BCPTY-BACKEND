@@ -24,7 +24,8 @@ import {
   responseKey,
   ResponseName,
 } from 'src/common/constants/response.constant';
-import { successResponse } from 'src/common/dtos/http-response.dto';
+import { SuccessResponse } from 'src/common/dtos/http-response.dto';
+
 import { UserDto } from '../../../modules/user/dtos';
 import { UserService } from '../../../modules/user/services';
 import { UserLoginDto, UserRegistrationDto } from '../dtos';
@@ -50,7 +51,7 @@ export class AuthController {
   @ApiOkResponse({
     description: 'Successfully Registered',
     status: HttpStatus.OK,
-    type: successResponse,
+    type: SuccessResponse,
   })
   @ApiOperation({ summary: 'Allows new users registration' })
   async register(
@@ -73,7 +74,7 @@ export class AuthController {
   @ApiOkResponse({
     description: 'An user logged in and a session cookie',
     status: HttpStatus.OK,
-    type: successResponse,
+    type: SuccessResponse,
   })
   @ApiOperation({ summary: 'Starts a new user session' })
   async login(

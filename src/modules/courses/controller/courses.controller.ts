@@ -17,7 +17,8 @@ import {
   responseKey,
   ResponseName,
 } from 'src/common/constants/response.constant';
-import { successResponse } from 'src/common/dtos/http-response.dto';
+import { SuccessResponse } from 'src/common/dtos/http-response.dto';
+
 import { JwtAccessTokenGuard } from 'src/modules/auth/guards';
 import { CourseCreateDto } from '../dto/models/courses-create.dto';
 import { CourseIndvRequestDto } from '../dto/request/course-ind.dto';
@@ -37,7 +38,7 @@ export class CoursesController {
   @ApiOkResponse({
     description: 'Successfully Registered Course',
     status: HttpStatus.OK,
-    type: successResponse,
+    type: SuccessResponse,
   })
   @ApiOperation({ summary: 'Registers a new course' })
   @UseGuards(JwtAccessTokenGuard)
@@ -63,7 +64,7 @@ export class CoursesController {
   @ApiOkResponse({
     description: 'Successfully Registered',
     status: HttpStatus.OK,
-    type: successResponse,
+    type: SuccessResponse,
   })
   @ApiOperation({ summary: 'Registers a new lesson into a course' })
   @UseGuards(JwtAccessTokenGuard)
@@ -86,7 +87,7 @@ export class CoursesController {
   @ApiOkResponse({
     description: 'Successfully Registered',
     status: HttpStatus.OK,
-    type: successResponse,
+    type: SuccessResponse,
   })
   @ApiOperation({ summary: 'retrieves a complete list about all the courses' })
   @UseGuards(JwtAccessTokenGuard)
@@ -113,7 +114,7 @@ export class CoursesController {
   @ApiOkResponse({
     description: 'Successfully Registered',
     status: HttpStatus.OK,
-    type: successResponse,
+    type: SuccessResponse,
   })
   @ApiOperation({ summary: 'retrieves a complete list about all the courses' })
   @UseGuards(JwtAccessTokenGuard)

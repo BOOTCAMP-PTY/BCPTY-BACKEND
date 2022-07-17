@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { ResponseName } from "../constants/response.constant";
 
-export class successResponse {
+export class SuccessResponse {
 
     @ApiProperty({
         example: ResponseName.SUCCESS,

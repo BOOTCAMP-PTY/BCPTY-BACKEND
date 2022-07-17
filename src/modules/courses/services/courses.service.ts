@@ -11,50 +11,56 @@ import { CourseLessonsGetRequestDto } from '../dto/request/course-lessons-get-dt
 import { CourseMaster } from '../entities/course-master.entity';
 import { CourseIndividual } from '../entities/course.entity';
 
-
-
-
 @Injectable()
 export class CourseService {
-    constructor(
-        @InjectRepository(CourseMaster)
-        private readonly _courseMasterRepository: Repository<CourseMaster>,
-        @InjectRepository(CourseIndividual)
-        private readonly _courseIndividualRepository: Repository<CourseIndividual>,
-        private readonly _userService: UserService,
-    ) { }
+  constructor(
+    @InjectRepository(CourseMaster)
+    private readonly _courseMasterRepository: Repository<CourseMaster>,
+    @InjectRepository(CourseIndividual)
+    private readonly _courseIndividualRepository: Repository<CourseIndividual>,
+    private readonly _userService: UserService,
+  ) {}
 
-    public async createCourseMaster(courserRegistrationDto: CourseCreateDto,): Promise<any> {
-        const userSearch: Partial<any> = { email: courserRegistrationDto.courseCollectionUserEmail }
-        const User = await this._userService.findUser(userSearch)
-        const authorUser = User.firstName;
-        const authorEmail = User.userAuth.email;
-        const createdUser: CourseMasterDto = {
-            ...courserRegistrationDto,
-            authorUser, authorEmail, User
-        };
-        return this._courseMasterRepository.save(createdUser)
+  public async createCourseMaster(
+    courserRegistrationDto: CourseCreateDto,
+  ): Promise<any> {
+    const userSearch: Partial<any> = {
+      email: courserRegistrationDto.courseCollectionUserEmail,
+    };
+    const User = await this._userService.findUser(userSearch);
+    const authorUser = User.firstName;
+    const authorEmail = User.userAuth.email;
+    const createdUser: CourseMasterDto = {
+      ...courserRegistrationDto,
+      authorUser,
+      authorEmail,
+      User,
+    };
+    return this._courseMasterRepository.save(createdUser);
+  }
 
-    }
+  public async addSubCourse(
+    courserRegistrationDto: CourseIndvRequestDto,
+  ): Promise<any> {
+    const createdUser: CourseLessonDto = { ...courserRegistrationDto };
+    return this._courseIndividualRepository.save(createdUser);
+  }
 
-    public async addSubCourse(courserRegistrationDto: CourseIndvRequestDto): Promise<any> {
+  public async getListLesson(
+    courserRegistrationDto: CourseLessonGetRequestDto,
+  ): Promise<any> {
+    return await this._courseIndividualRepository
+      .createQueryBuilder('courses_lessons')
+      .where('uuid = :id', { id: courserRegistrationDto.uuid_course })
+      .execute();
+  }
 
-        const createdUser: CourseLessonDto = { ...courserRegistrationDto };
-        return this._courseIndividualRepository.save(createdUser)
-
-    }
-    
-    public async getListLesson(courserRegistrationDto: CourseLessonGetRequestDto): Promise<any> {
-        const queryBuilder = await  this._courseIndividualRepository.createQueryBuilder('courses_lessons')
-            .where("uuid = :id", { id: courserRegistrationDto.uuid_course }).execute()
-        return queryBuilder;
-
-    }
-    
-    public async getListLessons(courserRegistrationDto: CourseLessonsGetRequestDto): Promise<any> {
-        const queryBuilder = await  this._courseIndividualRepository.createQueryBuilder('courses_lessons')
-            .where("id_course = :id", { id: courserRegistrationDto.id_course }).execute()
-        return queryBuilder;
-
-    }
+  public async getListLessons(
+    courserRegistrationDto: CourseLessonsGetRequestDto,
+  ): Promise<any> {
+    return await this._courseIndividualRepository
+      .createQueryBuilder('courses_lessons')
+      .where('id_course = :id', { id: courserRegistrationDto.id_course })
+      .execute();
+  }
 }
