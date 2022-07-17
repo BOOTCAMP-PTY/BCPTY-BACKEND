@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserService } from 'src/modules/user/services';
 import { Repository } from 'typeorm';
-import { CourseLessonDto } from '../dto/models/course-lesson.dto';
 import { CourseMasterDto } from '../dto/models/course-master.dto';
 import { CourseCreateDto } from '../dto/models/courses-create.dto';
 import { CourseIndvRequestDto } from '../dto/request/course-ind.dto';
@@ -42,7 +41,7 @@ export class CourseService {
   public async addSubCourse(
     courserRegistrationDto: CourseIndvRequestDto,
   ): Promise<any> {
-    const createdUser: CourseLessonDto = { ...courserRegistrationDto };
+    const createdUser = { ...courserRegistrationDto };
     return this._courseIndividualRepository.save(createdUser);
   }
 
