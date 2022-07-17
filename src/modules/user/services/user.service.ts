@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 
 import { UserDto } from '../dtos';
 import { UserAuthEntity, UserEntity } from '../entities';
@@ -24,7 +24,7 @@ export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly _userRepository: Repository<UserEntity>,
-    private DataSourceService: DataSource,
+    private DataSourceService: DataSource
   ) {}
 
   public async createUser(userCreateDto: UserRegistrationDto): Promise<any> {
@@ -39,7 +39,6 @@ export class UserService {
           const password = user.password;
           const createdUser = { ...userCreateDto, password ,user, pinCode };
           await transactionalEntityManager.save(UserAuthEntity, createdUser);
-
           return this.findUser({ uuid: user.uuid });
         },
       );

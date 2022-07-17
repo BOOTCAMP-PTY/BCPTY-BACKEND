@@ -120,7 +120,10 @@
     },
     "coveragePathIgnorePatterns": [
       "<rootDir>/common/utils/mocks",
-      "<rootDir>/modules/auth/tests"
+      "<rootDir>/modules/auth/tests",
+      "<rootDir>/migrations",
+      "<rootDir>/main.ts",
+      "<rootDir>/test"
     ]
   }
 }

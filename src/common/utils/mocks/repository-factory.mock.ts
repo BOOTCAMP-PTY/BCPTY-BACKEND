@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { DataSource, Repository } from "typeorm";
 import { MockType } from "./user.service.mock";
 
 export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(() => ({
@@ -14,6 +14,13 @@ export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(()
         orWhere: jest.fn().mockReturnThis(),
     }))
 }));
+
+export const MockDataSource: () => MockType<DataSource> = jest.fn(() => ({
+        manager: jest.fn(() => ({
+            transaction : (()=> {}),
+        }))
+}));
+
 
 export const repositoryMockFactoryDepre: () => MockType<Repository<any>> = jest.fn(() => ({
     findOne: jest.fn(entity => entity),

@@ -10,8 +10,6 @@ import { UserAuthService, UserService } from "src/modules/user/services";
 import { Repository } from "typeorm";
 import { AuthController } from "../../controllers";
 
-import { UserLoginDto } from "../../dtos";
-import { WrongCredentialsProvidedException } from "../../exceptions";
 import { AuthService } from "../../services";
 
 describe('AuthControllerMock1', () => {

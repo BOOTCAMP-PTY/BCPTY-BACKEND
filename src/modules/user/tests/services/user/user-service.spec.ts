@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { MockType } from 'src/common/utils/mocks';
-import { repositoryMockFactory } from 'src/common/utils/mocks/repository-factory.mock';
+import { MockDataSource, repositoryMockFactory } from 'src/common/utils/mocks/repository-factory.mock';
 import { UserRegistrationDto } from 'src/modules/auth/dtos';
 import { UserCreationException } from 'src/modules/user/exceptions';
 import { DataSource, Repository } from 'typeorm';
@@ -137,7 +137,8 @@ describe('UserServiceMock3', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UserService,
-        { provide: DataSource, useFactory: repositoryMockFactory },
+
+        { provide: DataSource, useFactory: MockDataSource },
         // Provide your mock instead of the actual repository
         {
           provide: getRepositoryToken(UserEntity),
@@ -153,6 +154,7 @@ describe('UserServiceMock3', () => {
     service = module.get<UserService>(UserService);
     repositoryMock = module.get(getRepositoryToken(UserEntity));
     repositoryAuthMock = module.get(getRepositoryToken(UserAuthEntity));
+
   });
 
   it('should do pinCode', async () => {
